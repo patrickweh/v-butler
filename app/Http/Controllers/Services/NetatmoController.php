@@ -20,7 +20,6 @@ class NetatmoController extends Controller
             $client->setVariable('username', $service->user);
             $client->setVariable('password', $service->password);
             $tokens = $client->getAccessToken();
-            dd($tokens);
 
             $service->token = $tokens['refresh_token'];
         }

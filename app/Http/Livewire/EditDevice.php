@@ -58,7 +58,12 @@ class EditDevice extends Component
     public function save()
     {
         $this->validate();
-        $device = Device::query()->whereKey($this->device['id'])->firstOrNew();
+        if ($this->device['id'] ?? false) {
+            $device = Device::query()->whereKey($this->device['id'])->firstOrNew();
+        } else {
+            $device = new Device();
+        }
+
         $device->fill($this->device);
         $device->save();
         $device->children()->sync(Arr::pluck($this->children, 'id'));

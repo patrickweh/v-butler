@@ -9,8 +9,6 @@ use Livewire\Component;
 class Profile extends Component
 {
     public bool $dark;
-    public array $devices = [];
-    public string $search = '';
 
     public function boot()
     {
@@ -20,14 +18,5 @@ class Profile extends Component
     public function render()
     {
         return view('livewire.profile');
-    }
-
-    public function updatedSearch()
-    {
-        if (!$this->search) {
-            $this->reset('devices');
-        } else {
-            $this->devices = Device::search($this->search)->paginate(5)->toArray()['data'];
-        }
     }
 }

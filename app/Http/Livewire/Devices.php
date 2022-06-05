@@ -3,17 +3,22 @@
 namespace App\Http\Livewire;
 
 use App\Models\Device;
-use Illuminate\Support\Facades\File;
 use Livewire\Component;
 
 class Devices extends Component
 {
     public array $devices = [];
+    public array $groupedDevices = [];
     public string $search = '';
     public int $page = 1;
     public int $pages = 1;
 
+    public ?int $roomId = null;
+    public ?int $deviceId = null;
+
     protected $listeners = ['echo:devices,DeviceCreated' => 'deviceAdded'];
+
+    protected $queryString = ['roomId', 'deviceId'];
 
     public function boot()
     {
@@ -47,6 +52,7 @@ class Devices extends Component
 
         if ($this->search) {
             $this->devices = $result['data'];
+            $this->page = 1;
         } else {
             $this->devices = array_merge($this->devices, $result['data']);
         }
