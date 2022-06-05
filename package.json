@@ -1,0 +1,34 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.7",
+        "axios": "^0.25",
+        "laravel-echo": "^1.11.7",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.4.13",
+        "pusher-js": "^7.1.0-beta",
+        "tailwindcss": "^3.0.24"
+    },
+    "dependencies": {
+        "@alpinejs/focus": "^3.9.1",
+        "@fortawesome/fontawesome-pro": "^6.1.1",
+        "@tailwindcss/aspect-ratio": "^0.4.0",
+        "@tailwindcss/forms": "^0.5.1",
+        "@tailwindcss/line-clamp": "^0.4.0",
+        "@tailwindcss/typography": "^0.5.2",
+        "alpinejs": "^3.10.2",
+        "dotenv": "^16.0.1",
+        "livewire-turbolinks": "^0.1.4",
+        "turbolinks": "^5.2.0"
+    }
+}

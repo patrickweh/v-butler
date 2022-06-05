@@ -1,0 +1,22 @@
+@import '~@fortawesome/fontawesome-pro/css/fontawesome.css';
+@import '~@fortawesome/fontawesome-pro/css/regular.css';
+@import '~@fortawesome/fontawesome-pro/css/solid.css';
+@import '~@fortawesome/fontawesome-pro/css/thin.css';
+@import '~@fortawesome/fontawesome-pro/css/duotone.css';
+@import '~@fortawesome/fontawesome-pro/css/brands.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] { display: none !important; }
+
+@layer base {
+    h1 {
+        @apply text-3xl py-2 font-bold;
+    }
+
+    h2 {
+        @apply text-2xl font-bold
+    }
+}
