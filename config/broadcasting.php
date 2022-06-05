@@ -38,9 +38,9 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
-                'host' => 'localhost',
-                'port' => 6001,
-                'scheme' => 'https'
+                'host' => env('PUSHER_HOST', 'localhost'),
+                'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
+                'scheme' => env('PUSHER_SCHEME', 'http')
             ],
             'client_options' => [
                 CURLOPT_SSL_VERIFYHOST => 0,
