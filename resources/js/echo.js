@@ -6,7 +6,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
-    wsPort: 6001,
+    wsPort: 443,
     forceTLS: false,
     disableStats: true,
 });
