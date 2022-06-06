@@ -1,0 +1,23 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Device;
+use App\Models\Service;
+
+class {{ class }} extends Controller
+{
+    public function import(Service $service)
+    {
+    }
+
+    public function on(Device $device)
+    {
+    }
+
+    public function off(Device $device)
+    {
+    }
+}

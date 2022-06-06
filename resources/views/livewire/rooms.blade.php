@@ -12,7 +12,11 @@
         @forelse($rooms as $room)
             <div class="pb-6">
                 <div class="w-full flex justify-between p-1">
-                    <h2>{{$room['name']}}</h2>
+                    <h2>
+                        <a href="{{route('devices', ['roomId' => $room['id']])}}">
+                            {{$room['name']}}
+                        </a>
+                    </h2>
                     <x-nav.room-dropdown :room="$room" />
                 </div>
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class="opacity-75">

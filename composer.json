@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "metnethu/netatmo-api": "^3.0",
+        "php-mqtt/laravel-client": "^1.0",
         "phpxmlrpc/polyfill-xmlrpc": "^1.0@RC",
         "pusher/pusher-php-server": "^7.0",
         "sqmk/phue": "^1.7",
