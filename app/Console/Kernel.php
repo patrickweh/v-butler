@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('devices:update')->everyMinute();
+        $schedule->command('telegram:sync')->everyFifteenMinutes();
     }
 
     /**

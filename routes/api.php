@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/doorbird/{device}/trigger', [DoorbirdController::class, 'trigger'])->name('doorbird.trigger');
+Route::get('/doorbird/trigger', [DoorbirdController::class, 'trigger'])->name('doorbird.trigger');
 Route::post('/nuki/trigger', [NukiController::class, 'trigger'])->name('nuki.trigger');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

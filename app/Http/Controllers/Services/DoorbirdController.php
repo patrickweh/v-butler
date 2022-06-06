@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\URL;
 
 class DoorbirdController extends Controller
 {
-    public function trigger(Device $device)
+    public function trigger()
     {
+        $service = Service::query()->where('controller', get_class($this))->first();
+        $device = $service->devices()->first();
+
         $image = $this->getImage($device->service);
         $url = URL::temporarySignedRoute(
             'nuki.on',
@@ -33,8 +36,10 @@ class DoorbirdController extends Controller
 
         $users = User::query()->whereNotNull('telegram_user_id')->get();
         foreach ($users as $user) {
-            $user->notify(new Telegram('KLINGEL',$path,$payload));
+            $user->notify(new Telegram('KLINGEL', $path, $payload));
         }
+
+        return response()->json(['status' => 'success']);
     }
 
     private function getImage(Service $service){
