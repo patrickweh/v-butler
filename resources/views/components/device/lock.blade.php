@@ -9,7 +9,7 @@
     </div>
     <div>
         <div class="-mt-px flex divide-x divide-gray-200">
-            <x-button class="w-full" wire:click="on" primary>
+            <x-button class="w-full" wire:click="on" primary spinner="on" loading-delay="short">
                 <x-slot name="label">
                     <i class="fa-solid fa-lock-open"></i> {{__('Open')}}
                 </x-slot>

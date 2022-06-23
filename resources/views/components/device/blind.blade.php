@@ -11,12 +11,12 @@
             <x-range-slider max="100" wire:model.lazy="device.value" />
         </div>
         <div class="-mt-px flex divide-x divide-gray-200">
-            <x-button class="w-full" secondary wire:click="off">
+            <x-button class="w-full" secondary wire:click="off" spinner="off" loading-delay="short">
                 <x-slot name="label">
                     <i class="fa-solid fa-down"></i> {{__('Close')}}
                 </x-slot>
             </x-button>
-            <x-button class="w-full" primary wire:click="on">
+            <x-button class="w-full" primary wire:click="on" spinner="on" loading-delay="short">
                 <x-slot name="label">
                     <i class="fa-solid fa-up"></i> {{__('Open')}}
                 </x-slot>

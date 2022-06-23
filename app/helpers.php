@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\Color\Hsl;
+
 if (! function_exists('make_color')) {
     function make_color($value, $min = 0, $max = 100)
     {
@@ -78,5 +80,18 @@ if (! function_exists('hsl_to_rgb')) {
         }
 
         return array('r' => $r * 255.0, 'g' => $g * 255.0, 'b' => $b * 255.0);
+    }
+}
+
+if (! function_exists('percent_to_color')) {
+    function percent_to_color($value, $min, $max)
+    {
+        $percentage = bcmul(bcdiv(bcsub($value, $min), bcsub($max,$min),2),100);
+        return 'bg-color-range-' . (int)round(bcdiv($percentage, 10,2));
+        $hue = ($percentage / 100) * (120 - 0);
+        $hsl = Hsl::fromString('hsl(' . $hue . ', 100%, 50%)');
+        $hex = $hsl->toHex();
+
+        return $hex;
     }
 }

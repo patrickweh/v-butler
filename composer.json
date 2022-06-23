@@ -23,8 +23,10 @@
         "php-mqtt/laravel-client": "^1.0",
         "phpxmlrpc/polyfill-xmlrpc": "^1.0@RC",
         "pusher/pusher-php-server": "^7.0",
+        "spatie/color": "^1.5",
         "sqmk/phue": "^1.7",
-        "wireui/wireui": "^1.1"
+        "wireui/wireui": "^1.1",
+      "ext-bcmath": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

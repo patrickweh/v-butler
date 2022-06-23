@@ -21,7 +21,8 @@ class Device extends Model
 
     protected $hidden = [
         'deleted_at',
-        'deleted_by'
+        'deleted_by',
+        'details',
     ];
 
     protected $casts = [
