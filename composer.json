@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -14,7 +17,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel-notification-channels/telegram": "^2.0",
         "laravel/fortify": "^1.13",
-        "laravel/framework": "^9.11",
+        "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/scout": "^9.4",
         "laravel/tinker": "^2.7",
@@ -26,7 +29,7 @@
         "spatie/color": "^1.5",
         "sqmk/phue": "^1.7",
         "wireui/wireui": "^1.1",
-      "ext-bcmath": "*"
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
