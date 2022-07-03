@@ -63,7 +63,10 @@ class HueController extends Controller
     private function toggleState(Device $device, Client $client, bool $on): void
     {
         $params = new SetLightState($device->foreign_id);
-        $params->on($on)->brightness(254);
+        $params->on($on);
+        if ($on) {
+            $params->brightness(254);
+        }
 
         $client->sendCommand($params);
         $device->is_on = $on;
