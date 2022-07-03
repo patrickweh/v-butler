@@ -73,7 +73,7 @@ class EditDevice extends Component
 
     public function updatedSearch()
     {
-        $result = Device::search($this->search)->paginate(5)->toArray();
+        $result = Device::search($this->search)->paginate(50)->toArray();
         if ($this->search) {
             $this->devices = $result['data'];
         } else {
