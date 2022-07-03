@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Service;
+namespace App\Http\Controllers\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Socket\Raw\Socket;
 
 class KasaController extends Controller
 {
