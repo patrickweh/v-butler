@@ -40,8 +40,6 @@ class HueController extends Controller
      */
     public function value(Device $device, int $value): void
     {
-        $value = $value > 1 ? round($value * 2.55) : $value;
-
         $client = new Client($device->service->url, $device->service->token);
         $params = new SetLightState($device->foreign_id);
         $params->on()->brightness($value);

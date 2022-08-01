@@ -10,30 +10,51 @@ class DeviceController extends Controller
     {
         $devices = $device->is_group ? $this->getDevices($device->children) : [$device];
 
+        $parents = [];
         foreach ($devices as $singleDevice) {
             $ctrl = new $singleDevice->service->controller;
             $ctrl->on($singleDevice);
             $singleDevice->is_on = true;
             $singleDevice->save();
+
+            $parents = array_merge($parents, $singleDevice->parent?->pluck('id')->toArray());
         }
+
+        $this->updateParents($parents, ['is_on' => true]);
     }
 
     public function off(Device $device)
     {
         $devices = $device->is_group ? $device->children : [$device];
 
+        $parents = [];
         foreach ($devices as $singleDevice) {
             $ctrl = new $singleDevice->service->controller;
             $ctrl->off($singleDevice);
             $singleDevice->is_on = false;
             $singleDevice->save();
+
+            $parents = array_merge($parents, $singleDevice->parent?->pluck('id')->toArray());
         }
+
+        $this->updateParents($parents, ['is_on' => false]);
     }
 
     public function value(Device $device, int $value)
     {
-        $ctrl = new $device->service->controller;
-        $ctrl->value($device, $value);
+        $devices = $device->is_group ? $device->children : [$device];
+
+        $parents = [];
+        foreach ($devices as $singleDevice) {
+            $ctrl = new $singleDevice->service->controller;
+            $ctrl->value($singleDevice, $value);
+            $singleDevice->value = $value;
+            $singleDevice->save();
+
+            $parents = array_merge($parents, $singleDevice->parent?->pluck('id')->toArray());
+        }
+
+        $this->updateParents($parents, ['value' => $value]);
     }
 
     private function getDevices(iterable $devices)
@@ -48,5 +69,19 @@ class DeviceController extends Controller
         }
 
         return $flatDevices;
+    }
+
+    private function updateParents(array $parentIds, array $values)
+    {
+        $parentDevices = Device::query()->whereIntegerInRaw('id', array_unique($parentIds))->get();
+
+        if (!count($parentDevices)) {
+            return;
+        }
+
+        foreach ($parentDevices as $parentDevice) {
+            $parentDevice->fill($values);
+            $parentDevice->save();
+        }
     }
 }

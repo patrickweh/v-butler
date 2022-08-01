@@ -55,6 +55,11 @@ class Device extends Model
         return $this->belongsToMany(Device::class, 'device_devices', 'parent_id');
     }
 
+    public function parent()
+    {
+        return $this->belongsToMany(Device::class, 'device_devices', 'device_id', 'parent_id');
+    }
+
     public function isFavorite(): Attribute
     {
         return Attribute::make(

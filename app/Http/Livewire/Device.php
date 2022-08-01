@@ -46,6 +46,7 @@ class Device extends Component
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
         $ctrl->on($device);
+        $this->device['is_on'] = true;
     }
 
     public function off()
@@ -53,6 +54,7 @@ class Device extends Component
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
         $ctrl->off($device);
+        $this->device['is_on'] = false;
     }
 
     public function value(int $value)
@@ -60,5 +62,6 @@ class Device extends Component
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
         $ctrl->value($device, $value);
+        $this->device['value'] = $value;
     }
 }
