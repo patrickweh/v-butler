@@ -1,10 +1,12 @@
 import Alpine from 'alpinejs';
 import focus from '@alpinejs/focus'
+import * as Turbo from "@hotwired/turbo";
+import 'livewire-turbolinks';
+import './features/dark-mode'
+
 Alpine.plugin(focus)
+
 window.Alpine = Alpine;
 Alpine.start();
 
-import 'livewire-turbolinks'
-
-const Turbolinks = require("turbolinks");
-Turbolinks.start()
+export default Turbo;

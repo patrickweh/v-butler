@@ -13,7 +13,7 @@ require("dotenv").config();
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/echo.js', 'public/js')
+    .js('resources/js/features/echo.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require("tailwindcss"),
     ]);

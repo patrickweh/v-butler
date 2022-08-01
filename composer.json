@@ -10,6 +10,7 @@
         "ext-curl": "*",
         "ext-simplexml": "*",
         "ext-soap": "*",
+        "ext-sockets": "*",
         "beyondcode/laravel-websockets": "^1.13",
         "danielme85/laravel-log-to-db": "^3.0",
         "ggottwald/miio": "^0.7.1",
@@ -21,14 +22,14 @@
         "laravel/scout": "^9.4",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
+        "meilisearch/meilisearch-php": "^0.24.0",
         "metnethu/netatmo-api": "^3.0",
         "php-mqtt/laravel-client": "^1.0",
         "phpxmlrpc/polyfill-xmlrpc": "^1.0@RC",
         "pusher/pusher-php-server": "^7.0",
         "spatie/color": "^1.5",
         "sqmk/phue": "^1.7",
-        "wireui/wireui": "^1.1",
-      "ext-sockets": "*"
+        "wireui/wireui": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

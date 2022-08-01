@@ -1,0 +1,9 @@
+=> [34;4mApp\Models\Cronjob[39;24m {#3881
+     [34mtype[39m: "[32mcommand[39m",
+     [34mcommand[39m: "[32mApp\Console\Commands\lala::class[39m",
+     [34mexpression[39m: "[32m* * * * *[39m",
+     [34mupdated_at[39m: "[32m2022-08-01 15:35:49[39m",
+     [34mcreated_at[39m: "[32m2022-08-01 15:35:49[39m",
+     [34mid[39m: [35m1[39m,
+   }
+

@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@hotwired/turbo": "^7.1.0",
         "autoprefixer": "^10.4.7",
         "axios": "^0.25",
         "laravel-echo": "^1.11.7",
@@ -28,7 +29,6 @@
         "@tailwindcss/typography": "^0.5.2",
         "alpinejs": "^3.10.2",
         "dotenv": "^16.0.1",
-        "livewire-turbolinks": "^0.1.4",
-        "turbolinks": "^5.2.0"
+        "livewire-turbolinks": "^0.1.4"
     }
 }
