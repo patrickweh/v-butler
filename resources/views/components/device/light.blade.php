@@ -9,7 +9,7 @@
 </div>
 <div>
     <div class="-mt-px flex divide-x divide-gray-200 p-6">
-        <x-range-slider max="254" wire:model.lazy="device.value" />
+        <x-range-slider max="254" wire:change="value($event.target.value)" wire:model.lazy="device.value" />
     </div>
 </div>
 

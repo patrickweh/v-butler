@@ -22,7 +22,7 @@
         {{$slot}}
     </main>
     @if(auth()->check())
-    <footer x-data="{activeItem: window.location.toString()}" id="footer-nav" data-turbo-permanent class="border-t backdrop-blur-xl fixed bottom-0 pb-6 pt-1 px-5 bg-gray-100/80 dark:border-t-0 dark:bg-neutral-700/80 text-center text-gray-300 w-full flex justify-between">
+    <footer x-data="{activeItem: window.location.toString()}" id="footer-nav" data-turbo-permanent class="border-t backdrop-blur-xl fixed bottom-0 pb-6 pt-1 px-5 bg-gray-100/95 dark:border-t-0 dark:bg-neutral-700/95 text-center text-gray-300 w-full flex justify-between">
         <x-nav />
     </footer>
     @endif

@@ -4,7 +4,7 @@
             <div class="w-full absolute flex justify-end p-1">
                 <x-nav.device-dropdown :device="$device" />
             </div>
-            <div>
+            <div class="h-full">
                 <x-dynamic-component :component="'device.' . $device['component']" :device="$device" />
             </div>
         </div>

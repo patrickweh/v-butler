@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Services;
 use App\Http\Controllers\Controller;
 use App\Models\Device;
 use App\Models\Service;
-use Illuminate\Http\Request;
 use Phue\Client;
 use Phue\Command\SetLightState;
 
@@ -48,8 +47,8 @@ class HueController extends Controller
         $params->on()->brightness($value);
         $client->sendCommand($params);
 
-        $devices->is_on = true;
-        $devices->value = $value;
+        $device->is_on = true;
+        $device->value = $value;
         $device->save();
     }
 

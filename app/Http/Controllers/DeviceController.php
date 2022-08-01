@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
-use Illuminate\Http\Request;
-use function PHPUnit\Framework\isInstanceOf;
 
 class DeviceController extends Controller
 {
@@ -32,10 +30,10 @@ class DeviceController extends Controller
         }
     }
 
-    public function value(Device $device)
+    public function value(Device $device, int $value)
     {
         $ctrl = new $device->service->controller;
-        $ctrl->value($device);
+        $ctrl->value($device, $value);
     }
 
     private function getDevices(iterable $devices)
