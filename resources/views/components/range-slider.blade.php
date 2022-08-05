@@ -14,7 +14,7 @@
             width: 0px;
             -webkit-appearance: none;
             height: 0px;
-            box-shadow: -408px 0 0 408px #43e5f7;
+            box-shadow: -408px 0 0 408px #4438ca;
         }
 
     }

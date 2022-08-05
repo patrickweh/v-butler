@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\DeviceController;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Device extends Component
@@ -47,6 +46,7 @@ class Device extends Component
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
         $ctrl->on($device);
+        $this->device['is_on'] = true;
     }
 
     public function off()
@@ -54,10 +54,14 @@ class Device extends Component
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
         $ctrl->off($device);
+        $this->device['is_on'] = false;
     }
 
-    public function value()
+    public function value(int $value)
     {
-
+        $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
+        $ctrl = new DeviceController();
+        $ctrl->value($device, $value);
+        $this->device['value'] = $value;
     }
 }

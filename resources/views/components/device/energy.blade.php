@@ -22,7 +22,7 @@
             <div class="text-gray-500">{{$device['name']}} </div>
             <div class="flex items-center space-x-3">
                 <i class="fa-solid {{$device['is_on'] ? 'fa-person-walking' : ''}}"></i>
-                <h1 class="text-white text-6xl font-medium truncate">{{$device['value'] ?? 0}} {{$device['config']['unit'] ?? 'W'}}</h1>
+                <h1 class="text-white text-6xl font-medium truncate">{{$device['value'] ?? 0}} W</h1>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Cronjob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +16,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $cronjobs = Cronjob::query()->where('is_active', true)->get();
+
+        foreach ($cronjobs as $cronjob) {
+            $schedule->{$cronjob->type}(get_class(new $cronjob->command()), $cronjob->command_params ?? [])->cron($cronjob->expression);
+        }
+
+        // These are mandatory cronjobs
         $schedule->command('devices:update')->everyMinute();
         $schedule->command('telegram:sync')->everyFifteenMinutes();
     }

@@ -22,6 +22,7 @@ class DeviceUpdated implements ShouldBroadcastNow
      */
     public function __construct(Device $device)
     {
+        $this->dontBroadcastToCurrentUser();
         $this->device = $device;
     }
 

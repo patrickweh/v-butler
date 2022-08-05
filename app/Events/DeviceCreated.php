@@ -22,6 +22,7 @@ class DeviceCreated implements ShouldBroadcast
      */
     public function __construct(Device $device)
     {
+        $this->dontBroadcastToCurrentUser();
         $this->device = $device;
     }
 

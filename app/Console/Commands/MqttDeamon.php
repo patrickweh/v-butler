@@ -38,7 +38,6 @@ class MqttDeamon extends Command
             foreach ($devices as $device) {
                 $this->matches[$topic . '/' . ltrim($device->foreign_id,'/')] = $device;
             }
-
         }
 
         $mqtt = MQTT::connection();

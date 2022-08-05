@@ -42,7 +42,7 @@ class Update extends Command
 
         foreach (Device::query()->where('is_group', true)->get() as $device) {
             $device->value = $device->children()?->avg('value') ?? 0;
-            $device->is_on = (bool)$device->children()?->sum('value') ?? false;
+            $device->is_on = (bool)$device->children()?->sum('is_on') ?? false;
             $device->save();
         }
         return 0;

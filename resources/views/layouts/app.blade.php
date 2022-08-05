@@ -12,14 +12,6 @@
     <wireui:scripts />
     @vite('resources/js/echo.js')
     @vite('resources/js/app.js')
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-
-    </script>
     @vite('resources/css/app.css')
     <livewire:styles />
 </head>
@@ -30,7 +22,7 @@
         {{$slot}}
     </main>
     @if(auth()->check())
-    <footer class="border-t backdrop-blur-xl fixed bottom-0 pb-6 pt-1 px-5 bg-gray-50 dark:border-t-0 dark:bg-neutral-700 text-center text-gray-300 w-full flex justify-between">
+    <footer x-data="{activeItem: window.location.toString()}" id="footer-nav" data-turbo-permanent class="border-t backdrop-blur-xl fixed bottom-0 pb-6 pt-1 px-5 bg-gray-100/95 dark:border-t-0 dark:bg-neutral-700/95 text-center text-gray-300 w-full flex justify-between">
         <x-nav />
     </footer>
     @endif

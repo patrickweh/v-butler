@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Service;
+namespace App\Http\Controllers\Services;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Socket\Raw\Socket;
 
-class KasaController extends Controller
+class MixPowerController extends Controller
 {
     public function on()
     {
+
     }
 
     public function off()
+    {
+
+    }
+
+    public function value()
     {
 
     }

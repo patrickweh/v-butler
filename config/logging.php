@@ -63,6 +63,11 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'database' => [
+            'driver' => 'custom',
+            'via' => danielme85\LaravelLogToDB\LogToDbHandler::class
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
