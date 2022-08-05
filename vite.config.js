@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
@@ -6,7 +6,7 @@ export default defineConfig({
         laravel([
             'resources/css/app.css',
             'resources/js/app.js',
-            'resources/js/echo.js',
+            'resources/js/features/echo.js',
         ]),
     ],
 });
