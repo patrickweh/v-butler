@@ -1,9 +1,9 @@
-@import '~@fortawesome/fontawesome-pro/css/fontawesome.css';
-@import '~@fortawesome/fontawesome-pro/css/regular.css';
-@import '~@fortawesome/fontawesome-pro/css/solid.css';
-@import '~@fortawesome/fontawesome-pro/css/thin.css';
-@import '~@fortawesome/fontawesome-pro/css/duotone.css';
-@import '~@fortawesome/fontawesome-pro/css/brands.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/fontawesome.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/regular.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/solid.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/thin.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/duotone.css';
+@import '/node_modules/@fortawesome/fontawesome-pro/css/brands.css';
 
 @tailwind base;
 @tailwind components;

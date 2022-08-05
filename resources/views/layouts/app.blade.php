@@ -10,9 +10,9 @@
     <title>{{config('app.name')}}</title>
     <livewire:scripts/>
     <wireui:scripts />
-    <script src="{{ mix('js/echo.js') }}" ></script>
-    <script defer src="{{ mix('/js/app.js') }}"></script>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @vite('resources/js/echo.js')
+    @vite('resources/js/app.js')
+    @vite('resources/css/app.css')
     <livewire:styles />
 </head>
 <body class="antialiased dark:bg-black dark:text-gray-100">
