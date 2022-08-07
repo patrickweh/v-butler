@@ -1,0 +1,57 @@
+{
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.woff2": {
+    "file": "assets/fa-brands-400.e67a9188.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900.417c616e.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.woff2": {
+    "file": "assets/fa-duotone-900.eaea4121.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400.16cef8ea.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.woff2": {
+    "file": "assets/fa-thin-100.1ea17be6.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.ttf": {
+    "file": "assets/fa-brands-400.2aeeace4.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.ttf": {
+    "file": "assets/fa-solid-900.e6e4c7ff.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.ttf": {
+    "file": "assets/fa-regular-400.54760a7d.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.ttf": {
+    "file": "assets/fa-duotone-900.8f19e351.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.ttf": {
+    "file": "assets/fa-thin-100.ba3c5dca.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.bb528f6e.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/features/echo.js": {
+    "file": "assets/echo.67a66a7b.js",
+    "src": "resources/js/features/echo.js",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.bce0ae7b.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  }
+}
