@@ -10,7 +10,7 @@
     <title>{{config('app.name')}}</title>
     <livewire:scripts/>
     <wireui:scripts />
-    @vite('resources/js/echo.js')
+    @vite('resources/js/features/echo.js')
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
     <livewire:styles />
