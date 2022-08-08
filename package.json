@@ -14,6 +14,7 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.13",
         "pusher-js": "^7.1.0-beta",
+        "tailwind-scrollbar": "^1.3.1",
         "tailwindcss": "^3.0.24",
         "vite": "^3.0.2"
     },
