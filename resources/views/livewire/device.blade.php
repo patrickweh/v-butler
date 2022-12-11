@@ -1,5 +1,5 @@
-<li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 dark:bg-gray-900">
-    <div class="h-full">
+<x-card class="!p-0">
+    <div class="h-full" x-data="{device: $wire.entangle('device')}">
         <div class="relative">
             <div class="w-full absolute flex justify-end p-1">
                 <x-nav.device-dropdown :device="$device" />
@@ -9,6 +9,6 @@
             </div>
         </div>
     </div>
-</li>
+</x-card>
 
 

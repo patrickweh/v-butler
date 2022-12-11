@@ -3,6 +3,7 @@
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Devices;
 use App\Http\Livewire\EditDevice;
+use App\Http\Livewire\EditRoom;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\Rooms;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('/rooms', Rooms::class)->name('rooms');
-    Route::get('/devices', Devices::class)->name('devices');
+    Route::get('/rooms/edit/{roomModel?}', EditRoom::class)->name('rooms.edit.id?');
+    Route::get('/devices/{room?}', Devices::class)->name('devices');
     Route::get('/devices/edit/{id?}', EditDevice::class)->name('devices.edit.id?');
     Route::get('/profile', Profile::class)->name('profile');
 });

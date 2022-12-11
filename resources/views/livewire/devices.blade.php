@@ -27,7 +27,7 @@
     </ul>
     @if($page < $pages)
         <div class="pt-6">
-            <x-button class="w-full" primary :label="__('Load more…')" wire:click="loadMore" />
+            <x-button spinner class="w-full" primary :label="__('Load more…')" wire:click="loadMore" />
         </div>
     @endif
 </div>

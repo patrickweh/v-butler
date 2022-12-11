@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Device;
+use App\Models\Room;
 use Livewire\Component;
 
 class Devices extends Component
@@ -18,10 +19,11 @@ class Devices extends Component
 
     protected $listeners = ['echo:devices,DeviceCreated' => 'deviceAdded'];
 
-    protected $queryString = ['roomId', 'deviceId'];
+    protected $queryString = ['deviceId'];
 
-    public function boot()
+    public function mount(?Room $room)
     {
+        $this->roomId = $room->id;
         $this->updatedSearch();
     }
 
@@ -43,7 +45,13 @@ class Devices extends Component
 
     public function updatedSearch()
     {
-        $result = Device::search($this->search)
+        $query = Device::search($this->search);
+
+        if ($this->roomId) {
+            $query->whereIn('room_ids', [$this->roomId]);
+        }
+
+        $result = $query
             ->paginate(
                 perPage: 15,
                 page: $this->search ? 1 : $this->page

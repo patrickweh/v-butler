@@ -1,7 +1,7 @@
 <div class="w-full flex items-center justify-between px-6 pt-6 space-x-6">
     <div class="flex-1 truncate">
         <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-vacuum-robot {{$device['is_on'] ? 'fa-spin' : ''}}"></i>
+            <i x-bind:class="device.is_on && 'fa-spin'" class="fa-solid fa-vacuum-robot"></i>
             <h3 class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name'] . ' (' . ($device['details']['state_message'] ?? 'unknown') . ')'}}</h3>
         </div>
     </div>

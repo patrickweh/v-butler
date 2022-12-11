@@ -4,9 +4,9 @@
             <x-logo />
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">{{__('Sign in to your account')}}</h2>
         </div>
-        @if(App::isLocal() || request()->server('SERVER_ADDR') === Request::ip())
+        @if(App::isLocal() || request()->ip() === request()->server('SERVER_ADDR'))
             <x-login-link />
-        @endenv
+        @endif
         <form class="mt-8 space-y-6" action="{{route('login')}}" method="POST">
             @csrf
             <x-input :placeholder="__('Email address')" wire:model="email"/>

@@ -16,7 +16,8 @@ class Device extends Model
     use SoftDeletes, Searchable;
 
     protected $appends = [
-        'is_favorite'
+        'is_favorite',
+        'room_ids',
     ];
 
     protected $hidden = [
@@ -45,6 +46,12 @@ class Device extends Model
         'updated' => DeviceUpdated::class
     ];
 
+    public array $meilisearchSettings = [
+        'updateFilterableAttributes' => [
+            'room_ids',
+        ],
+    ];
+
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
@@ -67,6 +74,14 @@ class Device extends Model
             set: fn($value) => $value ?
                 Auth::user()->devices()->attach($this->id) :
                 Auth::user()->devices()->detach($this->id)
+        );
+    }
+
+    protected function roomIds(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $this->rooms->pluck('id')->toArray(),
+            set: fn($value) => $this->rooms()->sync($value)
         );
     }
 

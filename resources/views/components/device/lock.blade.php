@@ -2,7 +2,7 @@
     <div class="w-full flex items-center justify-between px-6 pt-6 space-x-6">
         <div class="flex-1 truncate">
             <div class="flex items-center space-x-3">
-                <i class="fa-solid {{$device['is_on'] ? 'fa-door-open' : 'fa-door-closed'}}"></i>
+                <i x-bind:class="device.is_on ? 'fa-door-open' : 'fa-door-closed'" class="fa-solid"></i>
                 <h3 class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name']}}</h3>
             </div>
         </div>

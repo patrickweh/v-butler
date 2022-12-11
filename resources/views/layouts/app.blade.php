@@ -15,7 +15,7 @@
     @vite('resources/css/app.css')
     <livewire:styles />
 </head>
-<body class="antialiased dark:bg-black dark:text-gray-100">
+<body class="antialiased bg-slate-50 dark:bg-black dark:text-gray-100">
     <x-notifications z-index="z-50" />
     <x-dialog z-index="z-40" blur="md" align="center" />
     <main class="p-6 pb-24">

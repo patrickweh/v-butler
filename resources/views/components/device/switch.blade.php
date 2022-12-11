@@ -1,7 +1,7 @@
 <div class="w-full flex items-center justify-between p-6 space-x-6">
     <div class="flex-1 truncate">
         <div class="flex items-center space-x-3">
-            <i class="fa-duotone fa-lightbulb text-5xl" @if($device['is_on']) style="--fa-secondary-color: orange;" @endif ></i>
+            <i class="fa-duotone fa-lightbulb text-5xl" x-bind:style="device.is_on && '--fa-secondary-color: orange'"></i>
             <h3 class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name']}}</h3>
         </div>
     </div>

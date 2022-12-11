@@ -1,4 +1,4 @@
-<div class="rounded-lg flex flex-col justify-between h-full {{$device['is_on'] ? 'bg-positive-400' : 'bg-negative-400'}}">
+<div class="rounded-lg flex flex-col justify-between h-full" x-bind:class="device.is_on ? 'bg-positive-400' : 'bg-negative-400'">
     <div class="w-full flex items-center justify-between p-6 space-x-6">
         <div class="flex-1 truncate">
             <div class="text-gray-500">{{$device['name']}}</div>
