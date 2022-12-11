@@ -1,4 +1,5 @@
-<x-card class="!p-0">
+<x-card class="!p-0 relative">
+    <x-spinner wire:loading />
     <div class="h-full" x-data="{device: $wire.entangle('device').defer}">
         <div class="relative">
             <div class="w-full absolute flex justify-end p-1">
