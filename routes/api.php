@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/doorbird/trigger', [DoorbirdController::class, 'trigger'])->name('doorbird.trigger');
 Route::post('/nuki/trigger', [NukiController::class, 'trigger'])->name('nuki.trigger');
-Route::get('/energy/pv', [EnergyController::class, 'getPvData'])->name('energy.data');
-Route::get('/energy/battery', [EnergyController::class, 'getBatteryData'])->name('energy.data');
-Route::get('/energy/evu', [EnergyController::class, 'getEvuData'])->name('energy.data');
+Route::get('/energy/pv', [EnergyController::class, 'getPvData'])->name('energy.pv');
+Route::get('/energy/battery', [EnergyController::class, 'getBatteryData'])->name('energy.battery');
+Route::get('/energy/evu', [EnergyController::class, 'getEvuData'])->name('energy.evu');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/nuki/{device}/on', [NukiController::class, 'on'])->name('nuki.on');
