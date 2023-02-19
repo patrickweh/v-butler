@@ -24,7 +24,6 @@ class KasaController extends Controller
 
     public function import()
     {
-
     }
 
     private function encrypt($clear_text, $first_key = 0xAB)
@@ -33,32 +32,35 @@ class KasaController extends Controller
         $key = $first_key;
         for ($i = 1; $i < count($buf) + 1; $i++) {
             $buf[$i] = $buf[$i] ^ $key;
-            $key     = $buf[$i];
+            $key = $buf[$i];
         }
-        $array_map  = array_map('chr', $buf);
+        $array_map = array_map('chr', $buf);
         $clear_text = implode('', $array_map);
-        $length     = strlen($clear_text);
-        $header     = pack('N*', $length);
-        return $header . $clear_text;
+        $length = strlen($clear_text);
+        $header = pack('N*', $length);
+
+        return $header.$clear_text;
     }
 
     private function sendCommand(int $state, string $host)
     {
-        if (!($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP))) {
+        if (! ($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP))) {
             $errorcode = socket_last_error();
-            $errormsg  = socket_strerror($errorcode);
+            $errormsg = socket_strerror($errorcode);
             Log::error('Couldn create socket ', [$errormsg]);
+
             return;
         }
 
         //Connect socket to remote server
-        if (!socket_connect($sock, $host, 9999)) {
+        if (! socket_connect($sock, $host, 9999)) {
             $errorcode = socket_last_error();
-            $errormsg  = socket_strerror($errorcode);
+            $errormsg = socket_strerror($errorcode);
             Log::error('Could not connect to socket', [$errormsg]);
+
             return;
         }
-        $messageToSend = '{"system":{"set_relay_state":{"state":' . $state . '}}}';
+        $messageToSend = '{"system":{"set_relay_state":{"state":'.$state.'}}}';
         $message = $this->encrypt($messageToSend);
         socket_send($sock, $message, strlen($message), 0);
         socket_close($sock);

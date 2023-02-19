@@ -75,7 +75,7 @@ class DeviceController extends Controller
     {
         $parentDevices = Device::query()->whereIntegerInRaw('id', array_unique($parentIds))->get();
 
-        if (!count($parentDevices)) {
+        if (! count($parentDevices)) {
             return;
         }
 

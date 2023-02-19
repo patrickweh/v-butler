@@ -5,20 +5,19 @@ namespace App\Http\Controllers\Services;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Smart1XMLRPCClient;
 use App\Models\Device;
-use Illuminate\Http\Request;
 
 class Smart1Controller extends Controller
 {
     public function import()
     {
-
     }
 
-    private function runCommand(Device $device){
+    private function runCommand(Device $device)
+    {
         $sensorName = $device->foreign_id;
         $client = new Smart1XMLRPCClient($device->service->url);
 
-        if($deviceType->name == 'powerconsumption'){
+        if ($deviceType->name == 'powerconsumption') {
             $response = $client->getCounters($service->password);
         } else {
             $response = $client->getSensors($service->password);
@@ -29,9 +28,8 @@ class Smart1Controller extends Controller
             'Unit' => $response['Reply'][$sensorName]['Unit'],
             'Name' => $response['Reply'][$sensorName]['Name'],
             'Value' => $response['Reply'][$sensorName]['Current_Value'],
-            'Color' => $color
+            'Color' => $color,
         ];
-
 
         // update externalJson
         $response = $response['Reply'][$sensorName];

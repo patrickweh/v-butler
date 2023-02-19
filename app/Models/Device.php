@@ -38,12 +38,12 @@ class Device extends Model
         'updated_at',
         'updated_by',
         'deleted_at',
-        'deleted_by'
+        'deleted_by',
     ];
 
     protected $dispatchesEvents = [
         'created' => DeviceCreated::class,
-        'updated' => DeviceUpdated::class
+        'updated' => DeviceUpdated::class,
     ];
 
     public array $meilisearchSettings = [
@@ -70,8 +70,8 @@ class Device extends Model
     public function isFavorite(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => (bool)$this->users()->whereKey(Auth::id())->first(),
-            set: fn($value) => $value ?
+            get: fn ($value) => (bool) $this->users()->whereKey(Auth::id())->first(),
+            set: fn ($value) => $value ?
                 Auth::user()->devices()->attach($this->id) :
                 Auth::user()->devices()->detach($this->id)
         );
@@ -80,8 +80,8 @@ class Device extends Model
     protected function roomIds(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $this->rooms->pluck('id')->toArray(),
-            set: fn($value) => $this->rooms()->sync($value)
+            get: fn ($value) => $this->rooms->pluck('id')->toArray(),
+            set: fn ($value) => $this->rooms()->sync($value)
         );
     }
 

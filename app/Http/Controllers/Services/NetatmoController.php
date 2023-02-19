@@ -16,7 +16,7 @@ class NetatmoController extends Controller
         $config = $service->config;
         $client = new NAWSApiClient($config);
 
-        if (!$service->token) {
+        if (! $service->token) {
             $client->setVariable('username', $service->user);
             $client->setVariable('password', $service->password);
             $tokens = $client->getAccessToken();

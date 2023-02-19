@@ -20,9 +20,6 @@ class ImportCommand extends BaseImportCommand
 
     /**
      * Execute the console command.
-     *
-     * @param Dispatcher $events
-     * @return int
      */
     public function handle(Dispatcher $events): int
     {

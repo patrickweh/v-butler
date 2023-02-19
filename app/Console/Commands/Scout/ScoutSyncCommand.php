@@ -29,8 +29,6 @@ class ScoutSyncCommand extends Command
 
     /**
      * The meilisearch client.
-     *
-     * @var MeiliSearchEngine
      */
     private MeiliSearchEngine $client;
 
@@ -54,10 +52,6 @@ class ScoutSyncCommand extends Command
         $this->syncAll();
     }
 
-    /**
-     * @param string $model
-     * @return void
-     */
     private function syncModel(string $model): void
     {
         if ($this->hasSettings($model)) {
@@ -65,9 +59,6 @@ class ScoutSyncCommand extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     private function syncAll(): void
     {
         ModelFinder::all()
@@ -80,10 +71,6 @@ class ScoutSyncCommand extends Command
             );
     }
 
-    /**
-     * @param Model $model
-     * @return void
-     */
     private function updateSettings(Model $model): void
     {
         $index = $this->client->index($model->searchableAs());
@@ -113,18 +100,14 @@ class ScoutSyncCommand extends Command
                 $status = $index->{$key}($value);
 
                 $this->info(
-                    class_basename($model) . ' ' .
-                    str_replace('update', '', $key) .
-                    ' has been updated, updateId: ' . $status['taskUid']
+                    class_basename($model).' '.
+                    str_replace('update', '', $key).
+                    ' has been updated, updateId: '.$status['taskUid']
                 );
             }
         );
     }
 
-    /**
-     * @param $model
-     * @return bool
-     */
     private function hasSettings(string $model): bool
     {
         return in_array(Searchable::class, class_uses_recursive($model))

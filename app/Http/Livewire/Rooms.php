@@ -9,7 +9,9 @@ use Livewire\Component;
 class Rooms extends Component
 {
     public string $search = '';
+
     public array $rooms = [];
+
     public array $levels = [];
 
     public int $level = 0;

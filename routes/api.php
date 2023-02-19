@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\EnergyController;
 use App\Http\Controllers\Services\DoorbirdController;
 use App\Http\Controllers\Services\NukiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/doorbird/trigger', [DoorbirdController::class, 'trigger'])->name('doorbird.trigger');
 Route::post('/nuki/trigger', [NukiController::class, 'trigger'])->name('nuki.trigger');
+Route::get('/energy/pv', [EnergyController::class, 'getPvData'])->name('energy.data');
+Route::get('/energy/battery', [EnergyController::class, 'getBatteryData'])->name('energy.data');
+Route::get('/energy/evu', [EnergyController::class, 'getEvuData'])->name('energy.data');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/nuki/{device}/on', [NukiController::class, 'on'])->name('nuki.on');

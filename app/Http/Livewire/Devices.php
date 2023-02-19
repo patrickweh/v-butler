@@ -9,12 +9,17 @@ use Livewire\Component;
 class Devices extends Component
 {
     public array $devices = [];
+
     public array $groupedDevices = [];
+
     public string $search = '';
+
     public int $page = 1;
+
     public int $pages = 1;
 
     public ?int $roomId = null;
+
     public ?int $deviceId = null;
 
     protected $listeners = ['echo:devices,DeviceCreated' => 'deviceAdded'];

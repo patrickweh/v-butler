@@ -7,12 +7,14 @@ use Livewire\Component;
 class Login extends Component
 {
     public string $email = '';
+
     public string $password = '';
+
     public bool $remember = false;
 
     protected $rules = [
         'email' => 'required|email',
-        'password' => 'required|string'
+        'password' => 'required|string',
     ];
 
     public function render()
@@ -29,6 +31,6 @@ class Login extends Component
     {
         $this->validate();
 
-        return redirect()->route('login', ['password' => $this->password, 'email'=> $this->email]);
+        return redirect()->route('login', ['password' => $this->password, 'email' => $this->email]);
     }
 }

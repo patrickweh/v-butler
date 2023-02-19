@@ -19,8 +19,7 @@ class Smart1XMLRPCClient
 
     public function close()
     {
-        if ($this->curl_hdl !== null)
-        {
+        if ($this->curl_hdl !== null) {
             curl_close($this->curl_hdl);
         }
         $this->curl_hdl = null;
@@ -34,11 +33,9 @@ class Smart1XMLRPCClient
 
     public function __call($method, $params)
     {
-
         $xml = XmlRpc\XmlRpc::xmlrpc_encode_request($method, $params);
 
-        if ($this->curl_hdl === null)
-        {
+        if ($this->curl_hdl === null) {
             // Create cURL resource
             $this->curl_hdl = curl_init();
 
@@ -52,10 +49,9 @@ class Smart1XMLRPCClient
         curl_setopt($this->curl_hdl, CURLOPT_POSTFIELDS, $xml);
 
         $response = curl_exec($this->curl_hdl);
-        $result = XmlRpc\XmlRpc::xmlrpc_decode_request($response, $method,'UTF-8');
+        $result = XmlRpc\XmlRpc::xmlrpc_decode_request($response, $method, 'UTF-8');
         //$result = xmlrpc_decode_request($response, $method,'UTF-8');
 
         return $result;
     }
-
 }

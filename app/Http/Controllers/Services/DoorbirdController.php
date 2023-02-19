@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Services;
 
 use App\Http\Controllers\Controller;
-use App\Models\Device;
 use App\Models\Service;
 use App\Models\User;
 use App\Notifications\Telegram;
@@ -23,15 +22,15 @@ class DoorbirdController extends Controller
             'nuki.on',
             now()->addMinutes(5),
             [
-                'device' => $device->id
+                'device' => $device->id,
             ]
         );
         $path = Storage::path($image);
         $payload = [
-            "button" => [
+            'button' => [
                 'caption' => 'Öffnen',
-                'url' => $url
-            ]
+                'url' => $url,
+            ],
         ];
 
         $users = User::query()->whereNotNull('telegram_user_id')->get();
@@ -42,9 +41,10 @@ class DoorbirdController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    private function getImage(Service $service){
+    private function getImage(Service $service)
+    {
         $url = $service->url.'/bha-api/image.cgi';
-        $url = rtrim($url,"/");
+        $url = rtrim($url, '/');
         $filename = 'doorbird.jpg';
         $response = Http::withBasicAuth($service->user, $service->password)->get($url)->body();
         Storage::put($filename, $response);

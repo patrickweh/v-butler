@@ -65,7 +65,7 @@ return [
 
         'database' => [
             'driver' => 'custom',
-            'via' => danielme85\LaravelLogToDB\LogToDbHandler::class
+            'via' => danielme85\LaravelLogToDB\LogToDbHandler::class,
         ],
 
         'daily' => [

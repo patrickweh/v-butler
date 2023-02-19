@@ -32,11 +32,11 @@ class MqttDeamon extends Command
     public function handle()
     {
         $services = Service::query()->where('config', 'LIKE', '%mqtt_topic%')->get();
-        foreach ($services as $service) {#
+        foreach ($services as $service) {//
             $topic = rtrim($service->config['mqtt_topic'], '/');
             $devices = $service->devices;
             foreach ($devices as $device) {
-                $this->matches[$topic . '/' . ltrim($device->foreign_id,'/')] = $device;
+                $this->matches[$topic.'/'.ltrim($device->foreign_id, '/')] = $device;
             }
         }
 
@@ -44,14 +44,15 @@ class MqttDeamon extends Command
         $mqtt->subscribe('#', function (string $topic, string $message) {
             $device = $this->matches[$topic] ?? null;
             if ($device) {
-                $this->info($device->id . ' - ' . $device->name . ' -> ' . $message);
+                $this->info($device->id.' - '.$device->name.' -> '.$message);
                 $device->value = $message;
                 $device->save();
             }
-            $this->error($topic . ' skipped');
+            $this->error($topic.' skipped');
         }, 1);
 
         $mqtt->loop(true, true);
+
         return 0;
     }
 }

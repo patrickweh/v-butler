@@ -14,7 +14,7 @@ class EditRoom extends Component
 
     protected $rules = [
         'room.level_id' => 'nullable|exists:levels,id',
-        'room.name' => 'required|string'
+        'room.name' => 'required|string',
     ];
 
     public function mount(?Room $roomModel)
@@ -46,6 +46,7 @@ class EditRoom extends Component
     public function delete()
     {
         Room::query()->whereKey($this->room['id'])->first()->delete();
+
         return redirect()->route('rooms');
     }
 }

@@ -12,18 +12,24 @@ use Livewire\Component;
 class EditDevice extends Component
 {
     public array $device = [];
+
     public array $components = [];
+
     public array $rooms = [];
+
     public array $devices = [];
+
     public array $children = [];
+
     public string $search = '';
 
     public array $selected = [];
+
     public array $selectedRooms = [];
 
     protected $rules = [
         'device.component' => 'required|string',
-        'device.name' => 'required|string'
+        'device.name' => 'required|string',
     ];
 
     public function boot()
@@ -68,6 +74,7 @@ class EditDevice extends Component
         $device->save();
         $device->children()->sync(Arr::pluck($this->children, 'id'));
         $device->rooms()->sync(array_values($this->selectedRooms));
+
         return redirect()->route('devices');
     }
 
@@ -94,12 +101,13 @@ class EditDevice extends Component
             Auth::user()->devices()->detach($id);
         }
 
-        $this->device['is_favorite'] = !$this->device['is_favorite'];
+        $this->device['is_favorite'] = ! $this->device['is_favorite'];
     }
 
     public function delete()
     {
         Device::query()->whereKey($this->device['id'])->first()->delete();
+
         return redirect()->route('devices');
     }
 }

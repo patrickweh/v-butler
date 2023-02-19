@@ -35,16 +35,16 @@ class Update extends Command
                 try {
                     $ctrl->import($service);
                 } catch (\Exception $e) {
-
                 }
             }
         }
 
         foreach (Device::query()->where('is_group', true)->get() as $device) {
             $device->value = $device->children()?->avg('value') ?? 0;
-            $device->is_on = (bool)$device->children()?->sum('is_on') ?? false;
+            $device->is_on = (bool) $device->children()?->sum('is_on') ?? false;
             $device->save();
         }
+
         return 0;
     }
 }

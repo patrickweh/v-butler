@@ -8,7 +8,9 @@ use Livewire\Component;
 class DeviceSearch extends Component
 {
     public bool $list = false;
+
     public array $devices = [];
+
     public string $search = '';
 
     public function render()
@@ -18,6 +20,7 @@ class DeviceSearch extends Component
         } else {
             $this->devices = [];
         }
+
         return view('livewire.features.device-search');
     }
 }

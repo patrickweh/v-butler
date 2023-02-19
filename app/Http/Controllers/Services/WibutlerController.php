@@ -30,11 +30,11 @@ class WibutlerController extends Controller
 
         $payload = [
             'type' => 'switch',
-            'value' => $on ? 'ON' : 'OFF'
+            'value' => $on ? 'ON' : 'OFF',
         ];
 
         $client->sendCommand(
-            slug: 'devices/' . $device->foreign_id . '/components/' . $component,
+            slug: 'devices/'.$device->foreign_id.'/components/'.$component,
             method: 'PATCH',
             body: $payload
         );
@@ -44,14 +44,14 @@ class WibutlerController extends Controller
     {
         $client = new WibutlerClient($device->service);
 
-        $component =  'POS';
+        $component = 'POS';
         $payload = [
             'type' => 'numeric',
-            'value' => $value
+            'value' => $value,
         ];
 
         $client->sendCommand(
-            slug: 'devices/' . $device->foreign_id . '/components/' . $component,
+            slug: 'devices/'.$device->foreign_id.'/components/'.$component,
             method: 'PATCH',
             body: $payload
         );
@@ -82,7 +82,7 @@ class WibutlerController extends Controller
             $value = match ($wibutlerDevice->type) {
                 'Blind' => $components->where('name', 'CURPOS')->first()?->value ?? null,
                 'FloorHeatingController' => $components->where('name', 'TSP')->first()?->value ?? null,
-                'RoomOperatingPanels' => (float)$wibutlerDevice->statetext,
+                'RoomOperatingPanels' => (float) $wibutlerDevice->statetext,
                 default => null
             };
 
@@ -90,7 +90,7 @@ class WibutlerController extends Controller
                 'name' => $device->exists ? $device->name : $wibutlerDevice->name,
                 'component' => $component,
                 'details' => $wibutlerDevice,
-                'is_on' => (bool)$components->where('name', 'STATE')->first()?->value ?? null,
+                'is_on' => (bool) $components->where('name', 'STATE')->first()?->value ?? null,
                 'value' => $value,
                 'service_id' => $service->id,
                 'foreign_id' => $wibutlerDevice->id,

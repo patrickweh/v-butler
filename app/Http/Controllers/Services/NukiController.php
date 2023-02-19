@@ -39,7 +39,7 @@ class NukiController extends Controller
                 'is_on' => $nukiDevice->lastKnownState->doorsensorState === 3,
                 'value' => $nukiDevice->lastKnownState->batteryChargeState,
                 'foreign_id' => $nukiDevice->nukiId,
-                'service_id' => $service->id
+                'service_id' => $service->id,
             ]);
             $device->save();
         }
@@ -55,15 +55,15 @@ class NukiController extends Controller
         $device->save();
     }
 
-
     private function sendRequest(Service $service, string $slug, array $params = [], Model $device = null)
     {
         $params['token'] = $service->token;
         $params['nukiId'] = $device?->foreign_id;
         $params['nowait'] = 1;
 
-        $url = rtrim($service->url, '/') . '/' . ltrim($slug, '/') . '?' . http_build_query($params);
+        $url = rtrim($service->url, '/').'/'.ltrim($slug, '/').'?'.http_build_query($params);
         $response = Http::get($url);
+
         return json_decode($response->getBody()->getContents());
     }
 }

@@ -10,34 +10,18 @@ use Phue\Command\SetLightState;
 
 class HueController extends Controller
 {
-    /**
-     * @param Device $device
-     *
-     * @return void
-     */
     public function on(Device $device): void
     {
         $client = new Client($device->service->url, $device->service->token);
         $this->toggleState($device, $client, true);
     }
 
-    /**
-     * @param Device $device
-     *
-     * @return void
-     */
     public function off(Device $device): void
     {
         $client = new Client($device->service->url, $device->service->token);
         $this->toggleState($device, $client, false);
     }
 
-    /**
-     * @param Device $device
-     * @param int    $value
-     *
-     * @return void
-     */
     public function value(Device $device, int $value): void
     {
         $client = new Client($device->service->url, $device->service->token);
@@ -50,13 +34,6 @@ class HueController extends Controller
         $device->save();
     }
 
-    /**
-     * @param Device $device
-     * @param Client $client
-     * @param bool   $on
-     *
-     * @return void
-     */
     private function toggleState(Device $device, Client $client, bool $on): void
     {
         $params = new SetLightState($device->foreign_id);
@@ -71,11 +48,6 @@ class HueController extends Controller
         $device->save();
     }
 
-    /**
-     * @param Service $service
-     *
-     * @return void
-     */
     public function import(Service $service): void
     {
         $client = new Client($service->url, $service->token);

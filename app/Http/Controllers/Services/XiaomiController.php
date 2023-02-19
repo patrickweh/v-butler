@@ -22,7 +22,7 @@ class XiaomiController extends Controller
                 $device->is_on = $status['in_cleaning'] ?? false;
                 $device->value = $status['battery'] ?? 0;
                 $device->save();
-            }catch (\Exception $e) {
+            } catch (\Exception $e) {
             }
         }
     }

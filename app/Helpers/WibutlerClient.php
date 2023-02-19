@@ -5,18 +5,18 @@ namespace App\Helpers;
 use App\Models\Service;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Http;
 
 class WibutlerClient
 {
     protected string $method;
+
     protected Service $service;
 
     public function __construct(Service $service)
     {
         $this->service = $service;
         $this->setMethod();
-        if (!$service->token) {
+        if (! $service->token) {
             $this->getToken();
         }
     }
@@ -26,8 +26,9 @@ class WibutlerClient
         $this->method = $method ?: 'GET';
     }
 
-    public function sendCommand(string $slug, array $params = [], ?string $method = null, array $body = []) {
-        $url = rtrim($this->service->url . '/api/' . $slug . '/' . http_build_query($params), '/');
+    public function sendCommand(string $slug, array $params = [], ?string $method = null, array $body = [])
+    {
+        $url = rtrim($this->service->url.'/api/'.$slug.'/'.http_build_query($params), '/');
         $this->setMethod($method);
         $response = null;
         $client = new Client();
@@ -36,15 +37,16 @@ class WibutlerClient
                 'headers' => [
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Bearer '. $this->service->token
+                    'Authorization' => 'Bearer '.$this->service->token,
                 ],
                 'verify' => false,
-                'json' => $body
+                'json' => $body,
             ]);
         } catch (GuzzleException $e) {
-            if($e->getResponse()->getStatusCode() == 403){
+            if ($e->getResponse()->getStatusCode() == 403) {
                 $this->service->token = null;
                 $this->getToken();
+
                 return $this->sendCommand($slug, $params, $method, $body);
             }
         }
@@ -56,16 +58,16 @@ class WibutlerClient
     {
         $client = new Client();
         $response = $client->post(
-            rtrim($this->service->url, '/') . '/api/login',
+            rtrim($this->service->url, '/').'/api/login',
             [
                 'headers' => [
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
                 ],
                 'verify' => false,
                 'json' => [
                     'username' => $this->service->user,
-                    'password' => $this->service->password
-                ]
+                    'password' => $this->service->password,
+                ],
             ]
         );
 

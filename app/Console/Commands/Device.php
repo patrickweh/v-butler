@@ -33,6 +33,7 @@ class Device extends Command
 
         $ctrl = new DeviceController();
         $ctrl->{$cmd}($device);
+
         return 0;
     }
 }

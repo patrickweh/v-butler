@@ -8,21 +8,17 @@ class MixPowerController extends Controller
 {
     public function on()
     {
-
     }
 
     public function off()
     {
-
     }
 
     public function value()
     {
-
     }
 
     public function import()
     {
-
     }
 }

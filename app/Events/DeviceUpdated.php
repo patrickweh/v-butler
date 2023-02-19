@@ -33,6 +33,6 @@ class DeviceUpdated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('devices.' . $this->device->id);
+        return new Channel('devices.'.$this->device->id);
     }
 }

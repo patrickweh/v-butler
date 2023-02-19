@@ -29,12 +29,11 @@ class Telegram extends Command
      */
     public function handle()
     {
-
         // if a user without telegram id exists, check if there is a hello message and assign (update all users)
-        if (!User::query()->whereNull('telegram_user_id')->exists()) {
+        if (! User::query()->whereNull('telegram_user_id')->exists()) {
             $response = json_decode(Http::get(
-                'https://api.telegram.org/bot' .
-                config('services.telegram-bot-api.token') .
+                'https://api.telegram.org/bot'.
+                config('services.telegram-bot-api.token').
                 '/getUpdates'
             )
             );
@@ -46,7 +45,7 @@ class Telegram extends Command
                     $lastname = $item->message->chat->last_name;
                     $id = $item->message->chat->id;
                     $user = User::query()
-                        ->where('name', 'LIKE', '%' . $firstname . '%' . $lastname . '%')
+                        ->where('name', 'LIKE', '%'.$firstname.'%'.$lastname.'%')
                         ->first();
                     if ($user->exists()) {
                         $user->telegram_user_id = $id;

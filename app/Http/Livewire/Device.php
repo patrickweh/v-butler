@@ -8,7 +8,9 @@ use Livewire\Component;
 class Device extends Component
 {
     public array $device;
+
     public bool $favorites = false;
+
     public bool $small = false;
 
     public function updatedEvent($data)

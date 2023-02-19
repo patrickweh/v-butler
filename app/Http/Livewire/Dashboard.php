@@ -12,6 +12,7 @@ class Dashboard extends Component
     use Actions;
 
     public array $devices = [];
+
     public string $search = '';
 
     public function render()
@@ -21,7 +22,7 @@ class Dashboard extends Component
 
     public function updatedSearch()
     {
-        if (!$this->search) {
+        if (! $this->search) {
             $this->reset('devices');
         } else {
             $this->devices = Device::search($this->search)->paginate(5)->toArray()['data'];
