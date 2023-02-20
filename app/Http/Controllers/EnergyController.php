@@ -27,9 +27,16 @@ class EnergyController extends Controller
         $kostalDataW = $kostalService->getInverterData('devices:local', [
             'Dc_P',
         ])->get('Dc_P')['value'];
-        $mtecDataW = $this->mtecService->getSingleStationOverview(config('mtec.station_id'))->get('pac');
 
-        return response()->json(['PowerOut' => round($kostalDataW + $mtecDataW), 'PowerProduced' => round($mtecDataTodayW + $kostalDataTodayW)]);
+        $mtecData = $this->mtecService->getSingleStationOverview(config('mtec.station_id'));
+        $mtecDataW = $mtecData->pacUnit == 'kW' ? $mtecData->pac * 1000 : $mtecData->pac;
+
+        return response()->json([
+            'PowerOut' => round($kostalDataW + $mtecDataW),
+            'PowerProduced' => round($mtecDataTodayW + $kostalDataTodayW),
+            'mtec' => $kostalDataW,
+            'kostal' => $mtecDataW,
+        ]);
     }
 
     public function getBatteryData(): JsonResponse
