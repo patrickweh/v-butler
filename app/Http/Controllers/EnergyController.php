@@ -47,6 +47,9 @@ class EnergyController extends Controller
         $mtecData = $this->mtecService->getSingleStationOverview(config('mtec.station_id'));
         $multiplierPmeter = $mtecData->pmeterTotalUnit == 'kW' ? -1000 : -1;
         $multiplierPload = $mtecData->ploadUnit == 'kW' ? 1000 : 1;
+        if ($mtecData->arrowGridInverter) {
+            $mtecData->pmeterTotal = $mtecData->pmeterTotal * -1;
+        }
 
         return response()->json(['power' => $mtecData->pmeterTotal * $multiplierPmeter, 'watt' => $mtecData->pload * $multiplierPload]);
     }
