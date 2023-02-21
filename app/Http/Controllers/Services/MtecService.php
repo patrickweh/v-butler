@@ -25,7 +25,7 @@ class MtecService
             class_basename(self::class) . ':' . __FUNCTION__,
             20,
             function() use ($stationId) {
-                data_get(
+                return data_get(
                     Http::withHeaders([
                         'Accept' => '*/*',
                         'Accept-Language' => 'en-US',
@@ -51,7 +51,7 @@ class MtecService
             class_basename(self::class) . ':' . __FUNCTION__,
             20,
             function() use ($stationId, $date) {
-                data_get(
+                return data_get(
                     Http::withHeaders([
                         'Accept' => '*/*',
                         'Accept-Language' => 'en-US',
