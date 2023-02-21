@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Fluent;
 
@@ -20,40 +21,56 @@ class MtecService
 
     public function getSingleStationOverview(string $stationId)
     {
-        $data = data_get(
-            Http::withHeaders([
-                'Accept' => '*/*',
-                'Accept-Language' => 'en-US',
-                'Authorization' => $this->token,
-            ])
-            ->get($this->baseUrl.'/api/sys/curve/station/getSingleStationOverview',
-                [
-                    'id' => $stationId,
-                ]
-            )
-            ->json(),
-            'data');
+        $data = Cache::remember(
+            class_basename(self::class) . ':' . __FUNCTION__,
+            20,
+            function() use ($stationId) {
+                data_get(
+                    Http::withHeaders([
+                        'Accept' => '*/*',
+                        'Accept-Language' => 'en-US',
+                        'Authorization' => $this->token,
+                    ])
+                    ->get($this->baseUrl.'/api/sys/curve/station/getSingleStationOverview',
+                        [
+                            'id' => $stationId,
+                        ]
+                    )
+                    ->json(),
+                'data'
+                );
+            }
+        );
 
         return new Fluent($data);
     }
 
     public function getGridConnectedData(string $stationId, Carbon $date = null)
     {
-        $data = data_get(Http::withHeaders([
-            'Accept' => '*/*',
-            'Accept-Language' => 'en-US',
-            'Authorization' => $this->token,
-        ])
-        ->get($this->baseUrl.'/api/sys/curve/station/getGridConnectedData',
-            [
-                'id' => $stationId,
-                'durationType' => 1,
-                'date' => $date ?? date('Y-m-d'),
-                'stationType' => 0,
-                'timeZoneOffset' => 60,
-            ]
-        )
-        ->json(), 'data');
+        $data = Cache::remember(
+            class_basename(self::class) . ':' . __FUNCTION__,
+            20,
+            function() use ($stationId, $date) {
+                data_get(
+                    Http::withHeaders([
+                        'Accept' => '*/*',
+                        'Accept-Language' => 'en-US',
+                        'Authorization' => $this->token,
+                    ])
+                    ->get($this->baseUrl.'/api/sys/curve/station/getGridConnectedData',
+                        [
+                            'id' => $stationId,
+                            'durationType' => 1,
+                            'date' => $date ?? date('Y-m-d'),
+                            'stationType' => 0,
+                            'timeZoneOffset' => 60,
+                        ]
+                    )
+                    ->json(),
+                    'data'
+                );
+            }
+        );
 
         return new Fluent($data);
     }
