@@ -21,6 +21,6 @@ class Power extends Request
      */
     public function resolveEndpoint(): string
     {
-        return '/mtec_batterie_leistung';
+        return '/power_battery_w';
     }
 }

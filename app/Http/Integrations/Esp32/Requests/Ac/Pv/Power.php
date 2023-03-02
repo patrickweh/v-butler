@@ -21,6 +21,6 @@ class Power extends Request
      */
     public function resolveEndpoint(): string
     {
-        return '/mtec_pv_leistung';
+        return '/power_ac_tot_w_pv';
     }
 }

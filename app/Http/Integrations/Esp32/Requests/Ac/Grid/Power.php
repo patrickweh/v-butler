@@ -21,6 +21,6 @@ class Power extends Request
      */
     public function resolveEndpoint(): string
     {
-        return '/mtec_ac_zhler';
+        return '/ac_smartmeter_w';
     }
 }

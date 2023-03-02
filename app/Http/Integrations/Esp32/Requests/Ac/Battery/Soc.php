@@ -21,6 +21,6 @@ class Soc extends Request
      */
     public function resolveEndpoint(): string
     {
-        return '/mtec_soc_modbus';
+        return '/battery_soc';
     }
 }
