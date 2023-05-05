@@ -46,9 +46,6 @@ class EnergyController extends Controller
     public function getBatteryData(): JsonResponse
     {
         $mtecValue = $this->mtec->send(new BatteryPower())->json('value') * -1;
-        if ($mtecValue > 100000) {
-            $mtecValue = 0;
-        }
 
         return response()->json([
             'soc' => $this->mtec->send(new Soc())->json('value'),
@@ -59,9 +56,6 @@ class EnergyController extends Controller
     public function getEvuData(): JsonResponse
     {
         $mtecValue = $this->mtec->send(new GridPower())->json('value') * -1;
-        if ($mtecValue < 100000) {
-            $mtecValue = 0;
-        }
 
         $ctrl = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
         $counters = collect($ctrl->getCounters(config('pv-heiz.password'))['Reply']);
