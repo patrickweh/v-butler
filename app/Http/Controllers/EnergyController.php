@@ -56,13 +56,16 @@ class EnergyController extends Controller
         $mtecValue = $this->mtec->send(new GridPower())->json('value') * -1;
         $ctrl = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
         $counters = collect($ctrl->getCounters(config('pv-heiz.password'))['Reply']);
+        $quantum = $counters->get('calculationcounter_1681462391')['Current_Value'] * -1;
 
-        $mtecValue = $mtecValue + ($counters->get('calculationcounter_1681462391')['Current_Value'] * -1);
+        $totalPower = $mtecValue + $quantum;
 
         // negative werte = einspeisung
         // positive werte = bezug
         return response()->json([
-            'power' => $this->mtec->send(new GridPower())->json('value') * -1
+            'power' => $totalPower,
+            'mtec' => $mtecValue,
+            'quantum' => $quantum
         ]);
     }
 }
