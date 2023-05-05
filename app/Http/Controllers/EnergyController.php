@@ -11,6 +11,7 @@ use App\Http\Integrations\Esp32\Requests\Ac\Pv\Power as PvPower;
 use App\Http\Integrations\Kostal\KostalConnector;
 use App\Http\Integrations\Kostal\Requests\ProcessData\Module\ProcessData;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 class EnergyController extends Controller
 {
@@ -18,10 +19,17 @@ class EnergyController extends Controller
 
     private KostalConnector $kostal;
 
+    private Smart1XMLRPCClient $smart1;
+
+    private Collection $smart1counters;
+
     public function __construct()
     {
         $this->mtec = new MtecConnector();
         $this->kostal = new KostalConnector();
+        $this->smart1 = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
+
+        $this->smart1counters = collect($this->smart1->getCounters(config('pv-heiz.password')));
     }
 
     public function getPvData(): JsonResponse
@@ -37,7 +45,7 @@ class EnergyController extends Controller
 
         return response()->json([
             'PowerOut' => round($kostalDataW + $mtecDataW),
-            'PowerProduced' => round(0 + $kostalDataTodayW),
+            'PowerProduced' => $this->smart1counters->get('pv_global_1446025417')['Today_Usage'],
             'kostal' => $kostalDataW,
             'mtec' => $mtecDataW,
         ]);
@@ -62,10 +70,7 @@ class EnergyController extends Controller
         if (abs($mtecValue) > 50000) {
             $mtecValue = 0;
         }
-
-        $ctrl = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
-        $counters = collect($ctrl->getCounters(config('pv-heiz.password'))['Reply']);
-        $quantum = $counters->get('calculationcounter_1681462391')['Current_Value'] * -1;
+        $quantum = $this->smart1counters->get('calculationcounter_1681462391')['Current_Value'] * -1;
 
         $totalPower = $mtecValue + $quantum;
 
@@ -73,6 +78,8 @@ class EnergyController extends Controller
         // positive werte = bezug
         return response()->json([
             'power' => $totalPower,
+            'energyOut' => $this->smart1counters->get('buscounter_1414675701')['Today_Usage'],
+            'energyIn' => $this->smart1counters->get('buscounter_1414675598')['Today_Usage'],
             'mtec' => $mtecValue,
             'quantum' => $quantum
         ]);

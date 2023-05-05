@@ -6,10 +6,8 @@ use PhpXmlRpc\Polyfill\XmlRpc;
 
 class Smart1XMLRPCClient
 {
-    public function __construct($uri)
+    public function __construct(public string $uri, private \CurlHandle|bool|null $curlHandle = null)
     {
-        $this->uri = $uri;
-        $this->curl_hdl = null;
     }
 
     public function __destruct()
@@ -19,10 +17,11 @@ class Smart1XMLRPCClient
 
     public function close()
     {
-        if ($this->curl_hdl !== null) {
-            curl_close($this->curl_hdl);
+        if ($this->curlHandle !== null) {
+            curl_close($this->curlHandle);
         }
-        $this->curl_hdl = null;
+
+        $this->curlHandle = null;
     }
 
     public function setUri($uri)
@@ -35,23 +34,22 @@ class Smart1XMLRPCClient
     {
         $xml = XmlRpc\XmlRpc::xmlrpc_encode_request($method, $params);
 
-        if ($this->curl_hdl === null) {
+        if ($this->curlHandle === null) {
             // Create cURL resource
-            $this->curl_hdl = curl_init();
+            $this->curlHandle = curl_init();
 
             // Configure options
-            curl_setopt($this->curl_hdl, CURLOPT_URL, $this->uri);
-            curl_setopt($this->curl_hdl, CURLOPT_HEADER, 0);
-            curl_setopt($this->curl_hdl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($this->curl_hdl, CURLOPT_POST, true);
+            curl_setopt($this->curlHandle, CURLOPT_URL, $this->uri);
+            curl_setopt($this->curlHandle, CURLOPT_HEADER, 0);
+            curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($this->curlHandle, CURLOPT_POST, true);
         }
 
-        curl_setopt($this->curl_hdl, CURLOPT_POSTFIELDS, $xml);
+        curl_setopt($this->curlHandle, CURLOPT_POSTFIELDS, $xml);
 
-        $response = curl_exec($this->curl_hdl);
-        $result = XmlRpc\XmlRpc::xmlrpc_decode_request($response, $method, 'UTF-8');
+        $response = curl_exec($this->curlHandle);
         //$result = xmlrpc_decode_request($response, $method,'UTF-8');
 
-        return $result;
+        return XmlRpc\XmlRpc::xmlrpc_decode_request($response, $method, 'UTF-8');
     }
 }
