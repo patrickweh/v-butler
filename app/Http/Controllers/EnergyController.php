@@ -57,7 +57,7 @@ class EnergyController extends Controller
         $ctrl = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
         $counters = collect($ctrl->getCounters(config('pv-heiz.password'))['Reply']);
 
-        $mtecValue = $mtecValue + ($counters->get('calculationcounter_1681462391')->Current_Value * -1);
+        $mtecValue = $mtecValue + ($counters->get('calculationcounter_1681462391')['Current_Value'] * -1);
 
         // negative werte = einspeisung
         // positive werte = bezug
