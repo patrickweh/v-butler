@@ -47,20 +47,20 @@ class EnergyController extends Controller
     {
         $mtecValue = $this->mtec->send(new BatteryPower())->json('value');
         if (abs($mtecValue) > 50000) {
-            $mtecValue = 0;
+            return \Cache::get('energy.battery');
         }
 
-        return response()->json([
+        return \Cache::rememberForever('energy.battery', fn() => response()->json([
             'soc' => $this->mtec->send(new Soc())->json('value'),
             'consumption_w' => $mtecValue * -1,
-        ]);
+        ]));
     }
 
     public function getEvuData(): JsonResponse
     {
         $mtecValue = $this->mtec->send(new GridPower())->json('value') * -1;
         if (abs($mtecValue) > 50000) {
-            $mtecValue = 0;
+            return \Cache::get('energy.evu');
         }
 
         $ctrl = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
@@ -71,10 +71,10 @@ class EnergyController extends Controller
 
         // negative werte = einspeisung
         // positive werte = bezug
-        return response()->json([
+        return \Cache::rememberForever('energy.evu',  fn() => response()->json([
             'power' => $totalPower,
             'mtec' => $mtecValue,
             'quantum' => $quantum
-        ]);
+        ]));
     }
 }
