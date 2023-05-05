@@ -29,7 +29,7 @@ class EnergyController extends Controller
         $this->kostal = new KostalConnector();
         $this->smart1 = new Smart1XMLRPCClient(config('pv-heiz.base_url'));
 
-        $this->smart1counters = collect($this->smart1->getCounters(config('pv-heiz.password')));
+        $this->smart1counters = collect($this->smart1->getCounters(config('pv-heiz.password'))['Reply']);
     }
 
     public function getPvData(): JsonResponse
