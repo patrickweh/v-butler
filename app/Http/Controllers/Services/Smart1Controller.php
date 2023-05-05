@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Services;
 
+use App\Helpers\Smart1XMLRPCClient;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Smart1XMLRPCClient;
 use App\Models\Device;
 
 class Smart1Controller extends Controller
