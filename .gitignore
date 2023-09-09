@@ -13,3 +13,4 @@ yarn-error.log
 /.idea
 /.vscode
 /database/seeders/Ottacker53Seeder.php
+/update.sh

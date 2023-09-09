@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\Devices;
-use App\Http\Livewire\EditDevice;
-use App\Http\Livewire\EditRoom;
-use App\Http\Livewire\Profile;
-use App\Http\Livewire\Rooms;
+use App\Livewire\Dashboard;
+use App\Livewire\Devices;
+use App\Livewire\EditDevice;
+use App\Livewire\EditRoom;
+use App\Livewire\Profile;
+use App\Livewire\Rooms;
 use Illuminate\Support\Facades\Route;
 
 /*

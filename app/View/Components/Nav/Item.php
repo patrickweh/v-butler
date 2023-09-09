@@ -28,7 +28,7 @@ class Item extends Component
 
         $this->href = $href;
         $this->label = $label;
-        $this->icon = ($this->active ? 'fa-solid' : 'fa-regular').' fa-'.$icon;
+        $this->icon = $icon;
     }
 
     /**

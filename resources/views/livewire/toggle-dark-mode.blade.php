@@ -27,7 +27,7 @@
         name="sun"
     />
 
-    <x-toggle x-model="dark" id="dark-mode-toggle.{{ $this->id }}" />
+    <x-toggle x-model="dark" id="dark-mode-toggle.{{ $this->getId() }}" />
 
     <x-icon
         class="w-5 h-5 cursor-pointer text-gray-700 dark:text-secondary-200"

@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Notifications\Telegram;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
@@ -14,6 +15,9 @@ class DoorbirdController extends Controller
 {
     public function trigger()
     {
+        $speakers = implode(config('v-butler.doorbell.speakers'), ' ');
+        Process::timeout(20)->start('sonos ' . $speakers .' play ' . Storage::path('doorbell.mp3'));
+
         $service = Service::query()->where('controller', get_class($this))->first();
         $device = $service->devices()->first();
 

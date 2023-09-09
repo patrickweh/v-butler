@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Features;
+namespace App\Livewire\Features;
 
 use App\Models\Device;
 use Livewire\Component;

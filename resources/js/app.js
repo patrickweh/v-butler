@@ -1,15 +1,17 @@
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus'
-import * as Turbo from "@hotwired/turbo";
-import 'livewire-turbolinks';
 import './features/dark-mode'
-import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
 
-Alpine.plugin(focus)
+document.addEventListener('livewire:navigated', function() {
+    wireNavigation();
+});
 
-window.Alpine = Alpine;
-Alpine.start();
+document.addEventListener('livewire:init', function() {
+    wireNavigation();
+});
 
-export default Turbo;
+function wireNavigation() {
+    let links = document.querySelectorAll('a')
 
-livewire_hot_reload();
+    links.forEach(link => {
+        link.setAttribute('wire:navigate', 'true')
+    });
+}

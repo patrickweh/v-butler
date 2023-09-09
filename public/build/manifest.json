@@ -1,56 +1,16 @@
 {
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.woff2": {
-    "file": "assets/fa-brands-400.7b17fce6.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.woff2": {
-    "file": "assets/fa-regular-400.4bb4c355.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.woff2": {
-    "file": "assets/fa-solid-900.c0fd7653.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.woff2": {
-    "file": "assets/fa-thin-100.64cbd3b0.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.woff2": {
-    "file": "assets/fa-duotone-900.fc69a3f7.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.ttf": {
-    "file": "assets/fa-brands-400.0726ff45.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.ttf": {
-    "file": "assets/fa-solid-900.c52f0989.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.ttf": {
-    "file": "assets/fa-regular-400.c262547c.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.ttf": {
-    "file": "assets/fa-thin-100.679c81cf.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.ttf": {
-    "file": "assets/fa-duotone-900.7d194c5b.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-pro/webfonts/fa-duotone-900.ttf"
-  },
   "resources/js/app.js": {
-    "file": "assets/app.baa57b00.js",
+    "file": "assets/app.7d059018.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/features/echo.js": {
-    "file": "assets/echo.daa23dde.js",
+    "file": "assets/echo.5ed6cf88.js",
     "src": "resources/js/features/echo.js",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.451778db.css",
+    "file": "assets/app.21d2624f.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
