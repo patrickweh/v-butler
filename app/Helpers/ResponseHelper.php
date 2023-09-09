@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 class ResponseHelper
 {
     public static function createResponseFromBase(int $statusCode,
-                                                  mixed $data = [],
-                                                  string $statusMessage = null,
-                                                  array $additions = null,
-                                                  bool $bulk = false): JsonResponse
+        mixed $data = [],
+        string $statusMessage = null,
+        array $additions = null,
+        bool $bulk = false): JsonResponse
     {
         $headers = ['Content-Language' => app()->getLocale()];
 
@@ -79,10 +79,10 @@ class ResponseHelper
      * @param  mixed  $data
      */
     public static function createArrayResponse(int $statusCode,
-                                               mixed $data = null,
-                                               array $additions = [],
-                                               string $statusMessage = null,
-                                               bool $bulk = false): array
+        mixed $data = null,
+        array $additions = [],
+        string $statusMessage = null,
+        bool $bulk = false): array
     {
         $response = [
             'status' => $statusCode,
@@ -229,10 +229,10 @@ class ResponseHelper
      * @param  array|null  $data
      */
     private static function handle(mixed $data = null,
-                                   array $errors = null,
-                                   int $statusCode = 200,
-                                   string $statusMessage = null,
-                                   array $additions = null): array
+        array $errors = null,
+        int $statusCode = 200,
+        string $statusMessage = null,
+        array $additions = null): array
     {
         $json = [
             'status' => $statusCode,
@@ -247,9 +247,9 @@ class ResponseHelper
     }
 
     private static function handleMultiStatus(array $responses,
-                                              int $statusCode,
-                                              string $statusMessage = null,
-                                              array $additions = null): array
+        int $statusCode,
+        string $statusMessage = null,
+        array $additions = null): array
     {
         $json = [
             'status' => $statusCode,

@@ -9,8 +9,6 @@ class ProcessData extends Request
 {
     /**
      * Define the HTTP method
-     *
-     * @var Method
      */
     protected Method $method = Method::GET;
 
@@ -21,16 +19,14 @@ class ProcessData extends Request
     public function __construct(string $moduleId, string|array $processdataIds)
     {
         $this->moduleId = $moduleId;
-        $this->processDataIds = (array)$processdataIds;
+        $this->processDataIds = (array) $processdataIds;
     }
 
     /**
      * Define the endpoint for the request
-     *
-     * @return string
      */
     public function resolveEndpoint(): string
     {
-        return '/processdata/' . $this->moduleId  . '/' . implode(',', $this->processDataIds);
+        return '/processdata/'.$this->moduleId.'/'.implode(',', $this->processDataIds);
     }
 }

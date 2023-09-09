@@ -19,7 +19,7 @@ class Item extends Component
      *
      * @return void
      */
-    public function __construct($label, ?string $icon = null, ?string $href = null)
+    public function __construct($label, string $icon = null, string $href = null)
     {
         $routeName = app('router')->getRoutes()->match(
             app('request')->create($href)

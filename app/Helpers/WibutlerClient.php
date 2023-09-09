@@ -21,12 +21,12 @@ class WibutlerClient
         }
     }
 
-    public function setMethod(?string $method = null)
+    public function setMethod(string $method = null)
     {
         $this->method = $method ?: 'GET';
     }
 
-    public function sendCommand(string $slug, array $params = [], ?string $method = null, array $body = [])
+    public function sendCommand(string $slug, array $params = [], string $method = null, array $body = [])
     {
         $url = rtrim($this->service->url.'/api/'.$slug.'/'.http_build_query($params), '/');
         $this->setMethod($method);

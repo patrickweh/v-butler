@@ -24,8 +24,6 @@ class Finish extends Request implements HasBody
 
     /**
      * Define the HTTP method
-     *
-     * @var Method
      */
     protected Method $method = Method::POST;
 
@@ -37,7 +35,7 @@ class Finish extends Request implements HasBody
         $rounds = $previous->json('rounds');
         $clientNonce = $previous->getRequest()->clientNonce;
 
-        $saltedPassword =  hash_pbkdf2(
+        $saltedPassword = hash_pbkdf2(
             'sha256',
             config('kostal.password'),
             $salt,
@@ -62,8 +60,6 @@ class Finish extends Request implements HasBody
 
     /**
      * Define the endpoint for the request
-     *
-     * @return string
      */
     public function resolveEndpoint(): string
     {

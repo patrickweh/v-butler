@@ -27,38 +27,38 @@ class NetatmoController extends Controller
         $config['scope'] = 'read_station read_thermostat write_thermostat read_homecoach';
         $data = $client->getData();
         dd($data);
-//
-//        foreach($data['devices'][0]['modules'] as $device)
-//        {
-//            $device = (object)$device;
-//            switch ($device->data_type[0]){
-//                case 'Wind':
-//                    $deviceType = DeviceType::query()->where('name','wind')->first();
-//                    $unit = 'km/h';
-//                    $value = $device->dashboard_data['WindStrength'];
-//                    break;
-//                case 'Rain':
-//                    $deviceType = DeviceType::query()->where('name','rain')->first();
-//                    $unit = 'mm';
-//                    $value = $device->dashboard_data['Rain'];
-//                    break;
-//                default:
-//                    $deviceType = DeviceType::query()->where('name','currentweather')->first();
-//                    $value = null;
-//                    $unit = null;
-//            }
-//
-//            $model = Device::query()->where('externalDeviceId',$device->_id)->firstOrNew();
-//            $model->name = $device->module_name;
-//            $model->externalDeviceId = $device->_id;
-//            $model->service_id = $this->service->id;
-//            $model->deviceType_id = $deviceType->id;
-//            $model->externalJson = $device;
-//            $model->stateJson = array(
-//                'Unit' => $unit,
-//                'Name' => $device->module_name,
-//                'Value' => $value
-//            );
-//            $model->save();
+        //
+        //        foreach($data['devices'][0]['modules'] as $device)
+        //        {
+        //            $device = (object)$device;
+        //            switch ($device->data_type[0]){
+        //                case 'Wind':
+        //                    $deviceType = DeviceType::query()->where('name','wind')->first();
+        //                    $unit = 'km/h';
+        //                    $value = $device->dashboard_data['WindStrength'];
+        //                    break;
+        //                case 'Rain':
+        //                    $deviceType = DeviceType::query()->where('name','rain')->first();
+        //                    $unit = 'mm';
+        //                    $value = $device->dashboard_data['Rain'];
+        //                    break;
+        //                default:
+        //                    $deviceType = DeviceType::query()->where('name','currentweather')->first();
+        //                    $value = null;
+        //                    $unit = null;
+        //            }
+        //
+        //            $model = Device::query()->where('externalDeviceId',$device->_id)->firstOrNew();
+        //            $model->name = $device->module_name;
+        //            $model->externalDeviceId = $device->_id;
+        //            $model->service_id = $this->service->id;
+        //            $model->deviceType_id = $deviceType->id;
+        //            $model->externalJson = $device;
+        //            $model->stateJson = array(
+        //                'Unit' => $unit,
+        //                'Name' => $device->module_name,
+        //                'Value' => $value
+        //            );
+        //            $model->save();
     }
 }

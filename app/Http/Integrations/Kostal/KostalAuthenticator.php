@@ -10,13 +10,12 @@ use Saloon\Contracts\PendingRequest;
 
 class KostalAuthenticator implements Authenticator
 {
-
     /**
      * @throws \Exception
      */
     public function set(PendingRequest $pendingRequest): void
     {
-        if(
+        if (
             $pendingRequest->getRequest() instanceof Start
             || $pendingRequest->getRequest() instanceof Finish
             || $pendingRequest->getRequest() instanceof CreateSession
@@ -30,6 +29,6 @@ class KostalAuthenticator implements Authenticator
         $finish = $connector->send(new Finish($start));
         $session = $connector->send(new CreateSession($finish));
 
-        $pendingRequest->headers()->add('Authorization', 'Session ' . $session->json('sessionId'));
+        $pendingRequest->headers()->add('Authorization', 'Session '.$session->json('sessionId'));
     }
 }

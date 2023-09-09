@@ -11,12 +11,10 @@ class KostalConnector extends Connector
 
     /**
      * The Base URL of the API
-     *
-     * @return string
      */
     public function resolveBaseUrl(): string
     {
-        return config('kostal.url') . '/api/v1/';
+        return config('kostal.url').'/api/v1/';
     }
 
     /**
@@ -28,7 +26,7 @@ class KostalConnector extends Connector
     {
         return [
             'Content-Type' => 'application/json',
-            'Accept-Language' => 'en_US'
+            'Accept-Language' => 'en_US',
         ];
     }
 

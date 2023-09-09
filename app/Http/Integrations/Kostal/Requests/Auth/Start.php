@@ -15,8 +15,6 @@ class Start extends Request implements HasBody
 
     /**
      * Define the HTTP method
-     *
-     * @var Method
      */
     protected Method $method = Method::POST;
 
@@ -27,8 +25,6 @@ class Start extends Request implements HasBody
 
     /**
      * Define the endpoint for the request
-     *
-     * @return string
      */
     public function resolveEndpoint(): string
     {
@@ -39,7 +35,7 @@ class Start extends Request implements HasBody
     {
         return [
             'username' => 'user',
-            'nonce' => $this->clientNonce
+            'nonce' => $this->clientNonce,
         ];
     }
 }

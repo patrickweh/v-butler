@@ -11,12 +11,10 @@ class MtecConnector extends Connector
 
     /**
      * The Base URL of the API
-     *
-     * @return string
      */
     public function resolveBaseUrl(): string
     {
-        return config('mtec.base_url') . '/sensor';
+        return config('mtec.base_url').'/sensor';
     }
 
     /**

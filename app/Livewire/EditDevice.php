@@ -42,7 +42,7 @@ class EditDevice extends Component
         $this->rooms = Room::all()->toArray();
     }
 
-    public function mount(?int $id = null)
+    public function mount(int $id = null)
     {
         if ($id) {
             $device = Device::query()->whereKey($id)->firstOrFail();

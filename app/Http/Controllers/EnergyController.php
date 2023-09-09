@@ -81,7 +81,7 @@ class EnergyController extends Controller
             'energyOut' => $this->smart1counters->get('buscounter_1414675701')['Today_Usage'],
             'energyIn' => $this->smart1counters->get('buscounter_1414675598')['Today_Usage'],
             'mtec' => $mtecValue,
-            'quantum' => $quantum
+            'quantum' => $quantum,
         ]);
     }
 }

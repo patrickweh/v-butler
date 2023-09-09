@@ -13,7 +13,7 @@ use Laravel\Scout\Searchable;
 
 class Device extends Model
 {
-    use SoftDeletes, Searchable;
+    use Searchable, SoftDeletes;
 
     protected $appends = [
         'is_favorite',
