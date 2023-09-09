@@ -4,9 +4,11 @@ namespace App\Livewire;
 
 use App\Models\Device;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
+#[Lazy]
 class Dashboard extends Component
 {
     use Actions;

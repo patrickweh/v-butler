@@ -3,10 +3,10 @@
         <h1>{{__('Rooms')}}</h1>
         {{--        <i onclick="$openModal('newDeviceModal')" class="fa-regular fa-plus-circle text-blue-500 cursor-pointer"></i>--}}
         <a href="{{route('devices.edit.id?')}}">
-            <i class="fa-regular fa-plus-circle text-blue-500 cursor-pointer"></i>
+            <x-phosphor.icons::regular.plus-circle class="fill-blue-500 cursor-pointer w-6 h-6" />
         </a>
     </div>
-    <x-input icon="search" wire:model.debounce.500ms="search" :placeholder="__('Search rooms')" />
+    <x-input icon="search" wire:model.live.debounce.500ms="search" :placeholder="__('Search rooms')" />
     <div class="pb-6">
         <div class="border-b border-gray-200" wire:ignore>
             <nav class="-mb-px flex gap-x-8" x-data="{levels: $wire.entangle('levels'), activeLevel: $wire.entangle('level')}">

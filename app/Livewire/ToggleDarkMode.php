@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
+#[Lazy]
 class ToggleDarkMode extends Component
 {
     public bool $dark = false;

@@ -3,8 +3,10 @@
 namespace App\Livewire\Features;
 
 use App\Models\Device;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
+#[Lazy]
 class DeviceSearch extends Component
 {
     public bool $list = false;

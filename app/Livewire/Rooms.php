@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use App\Models\Level;
 use App\Models\Room;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
+#[Lazy]
 class Rooms extends Component
 {
     public string $search = '';

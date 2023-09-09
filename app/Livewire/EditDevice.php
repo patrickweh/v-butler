@@ -7,8 +7,10 @@ use App\Models\Room;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
+#[Lazy]
 class EditDevice extends Component
 {
     public array $device = [];

@@ -3,7 +3,7 @@
         <div class="flex-1 truncate">
             <div class="text-gray-500">{{$device['name']}}</div>
             <div class="flex items-center space-x-3">
-                <i class="fa-solid {{$device['is_on'] ? 'fa-person-walking' : ''}}"></i>
+                <x-phosphor.icons::fill.person-simple-walk x-bind:class="device.is_on && 'animate-bounce'" class="w-10 h-10"/>
                 <h1 class="text-white text-6xl font-medium truncate">{{$device['value']}} °C</h1>
             </div>
         </div>

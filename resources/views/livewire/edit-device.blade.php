@@ -2,7 +2,7 @@
     <x-input wire:model.defer="device.name" :label="__('Name')" :placeholder="__('Device name…')" />
     @if($device['id'] ?? false)
     <div wire:click="favorite({{$device['id']}}, {{(string)!$device['is_favorite']}})" class="p-1 cursor-pointer">
-        <i class="text-yellow-500 {{$device['is_favorite'] ? 'fa-solid' : 'fa-regular'}} fa-star"></i> {{__('Favorite')}}
+        <x-phosphor.icons::fill.star x-bind:class="device.is_favorite && 'fill-amber-500'" class="w-6 h-6"/>
     </div>
     @endif
     <x-select
@@ -13,20 +13,20 @@
     />
     <h2 class="">{{__('Assigned rooms')}}</h2>
     @foreach($rooms as $room)
-        <x-checkbox :id="(string)\Illuminate\Support\Str::uuid()" value="{{$room['id']}}" wire:model="selectedRooms" :label="$room['name']"/>
+        <x-checkbox :id="(string)\Illuminate\Support\Str::uuid()" value="{{$room['id']}}" wire:model.live="selectedRooms" :label="$room['name']"/>
     @endforeach
 
     @if($device['is_group'] ?? false)
         <h2 class="">{{__('Assigned devices')}}</h2>
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class="opacity-75">
         @foreach($children as $device)
-                <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model="selected" :label="$device['name']"/>
+                <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model.live="selected" :label="$device['name']"/>
         @endforeach
         </ul>
-        <x-input wire:model="search" icon="search" />
+        <x-input wire:mode.live="search" icon="search" />
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class="opacity-75">
         @foreach($devices as $device)
-            <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model="selected" :label="$device['name']"/>
+            <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model.live="selected" :label="$device['name']"/>
         @endforeach
         </ul>
     @endif

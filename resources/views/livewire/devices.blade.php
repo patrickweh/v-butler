@@ -3,11 +3,11 @@
         <h1>{{__('Devices')}}</h1>
         {{--        <i onclick="$openModal('newDeviceModal')" class="fa-regular fa-plus-circle text-blue-500 cursor-pointer"></i>--}}
         <a href="{{route('devices.edit.id?')}}">
-            <i class="fa-regular fa-plus-circle text-blue-500 cursor-pointer"></i>
+            <x-phosphor.icons::regular.plus-circle class="fill-blue-500 cursor-pointer" />
         </a>
     </div>
     <div class="pb-6">
-        <x-input autocorrect="off" autocapitalize="off" spellcheck="false" icon="search" wire:model.debounce.500ms="search" :placeholder="__('Search devices')" />
+        <x-input autocorrect="off" autocapitalize="off" spellcheck="false" icon="search" wire:model.live.debounce.500ms="search" :placeholder="__('Search devices')" />
     </div>
     @if($groupedDevices)
         <h2 class="pb-6">{{__('Grouped devices')}}</h2>
