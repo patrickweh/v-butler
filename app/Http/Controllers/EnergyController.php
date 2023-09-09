@@ -34,18 +34,33 @@ class EnergyController extends Controller
 
     public function getPvData(): JsonResponse
     {
-        $kostalDataW = $this->kostal
-            ->send(new ProcessData('devices:local', 'Dc_P'))
-            ->json('0.processdata.0.value');
-        $kostalDataTodayW = $this->kostal
-            ->send(new ProcessData('scb:statistic:EnergyFlow', 'Statistic:Yield:Day'))
-            ->json('0.processdata.0.value');
+        try {
+            $kostalDataW = $this->kostal
+                ->send(new ProcessData('devices:local', 'Dc_P'))
+                ->json('0.processdata.0.value');
+            $kostalDataTodayW = $this->kostal
+                ->send(new ProcessData('scb:statistic:EnergyFlow', 'Statistic:Yield:Day'))
+                ->json('0.processdata.0.value');
+        } catch (\Exception $e) {
+            $kostalDataW = 0;
+            $kostalDataTodayW = 0;
+        }
 
-        $mtecDataW = $this->mtec->send(new PvPower())->json('value');
+        try {
+            $mtecDataW = $this->mtec->send(new PvPower())->json('value');
+        } catch (\Exception $e) {
+            $mtecDataW = 0;
+        }
+
+        try {
+            $powerProduced = $this->smart1counters->get('pv_global_1446025417')['Today_Usage'];
+        } catch (\Exception $e) {
+            $powerProduced = 0;
+        }
 
         return response()->json([
             'PowerOut' => round($kostalDataW + $mtecDataW),
-            'PowerProduced' => $this->smart1counters->get('pv_global_1446025417')['Today_Usage'],
+            'PowerProduced' => $powerProduced,
             'kostal' => $kostalDataW,
             'mtec' => $mtecDataW,
         ]);
@@ -53,7 +68,12 @@ class EnergyController extends Controller
 
     public function getBatteryData(): JsonResponse
     {
-        $mtecValue = $this->mtec->send(new BatteryPower())->json('value');
+        try {
+            $mtecValue = $this->mtec->send(new BatteryPower())->json('value');
+        } catch (\Exception $e) {
+            $mtecValue = 0;
+        }
+
         if (abs($mtecValue) > 50000) {
             $mtecValue = 0;
         }
@@ -66,7 +86,12 @@ class EnergyController extends Controller
 
     public function getEvuData(): JsonResponse
     {
-        $mtecValue = $this->mtec->send(new GridPower())->json('value') * -1;
+        try {
+            $mtecValue = $this->mtec->send(new GridPower())->json('value');
+        } catch (\Exception $e) {
+            $mtecValue = 0;
+        }
+
         if (abs($mtecValue) > 50000) {
             $mtecValue = 0;
         }
