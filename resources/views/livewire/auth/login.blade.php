@@ -9,12 +9,12 @@
         @endif
         <form class="mt-8 space-y-6" action="{{route('login')}}" method="POST">
             @csrf
-            <x-input :placeholder="__('Email address')" wire:model="email"/>
-            <x-input type="password" :placeholder="__('Password')" wire:model="password"/>
+            <x-input :placeholder="__('Email address')" wire:model.live="email"/>
+            <x-input type="password" :placeholder="__('Password')" wire:model.live="password"/>
 
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <x-checkbox id="right-label" :label="__('Remember me')" wire:model="remember" />
+                    <x-checkbox id="right-label" :label="__('Remember me')" wire:model.live="remember" />
                 </div>
 
                 <div class="text-sm">

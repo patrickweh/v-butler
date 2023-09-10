@@ -5,5 +5,5 @@
             <h3 class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name']}}</h3>
         </div>
     </div>
-    <x-toggle :id="(string)\Illuminate\Support\Str::uuid()" x-on:click="$wire.toggle(); device.is_on = !device.is_on" lg wire:model.defer="device.is_on" />
+    <x-toggle :id="(string)\Illuminate\Support\Str::uuid()" x-on:click="$wire.toggle(); device.is_on = !device.is_on" lg wire:model="device.is_on" />
 </div>

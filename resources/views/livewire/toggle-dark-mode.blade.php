@@ -1,5 +1,5 @@
 <div class="flex items-center gap-x-2 justify-center" x-data="{
-    dark: @entangle('dark'),
+    dark: @entangle('dark').live,
     browserDarkMode() {
         return window.matchMedia('(prefers-color-scheme: dark)').matches
     },

@@ -8,18 +8,18 @@
 </div>
 <div>
     <div class="p-6">
-        <x-range-slider max="100" wire:model.lazy="device.value" />
+        <x-range-slider max="100" wire:model.blur="device.value" />
     </div>
     <div class="-mt-px flex divide-x divide-gray-200">
         @if($device['is_on'])
-        <x-button class="w-full" secondary wire:click="off" spinner="off" loading-delay="short">
+        <x-button class="w-full" secondary wire:click="switchOff()" spinner="off" loading-delay="short">
             <x-slot name="label">
                 <x-phosphor.icons::fill.stop class="w-6 h-6" />
                 {{__('Stop')}}
             </x-slot>
         </x-button>
         @else
-        <x-button class="w-full" primary wire:click="on" spinner="on" loading-delay="short">
+        <x-button class="w-full" primary wire:click="switchOn()" spinner="on" loading-delay="short">
             <x-slot name="label">
                 <x-phosphor.icons::fill.play class="w-6 h-6"/>
                 {{__('Start')}}

@@ -1,5 +1,5 @@
-<div class="space-y-6" x-data="{device: $wire.entangle('device')}">
-    <x-input wire:model.defer="device.name" :label="__('Name')" :placeholder="__('Device name…')" />
+<div class="space-y-6" x-data="{device: $wire.$entangle('device', true)}">
+    <x-input wire:model="device.name" :label="__('Name')" :placeholder="__('Device name…')" />
     @if($device['id'] ?? false)
     <div wire:click="favorite({{$device['id']}}, {{(string)!$device['is_favorite']}})" class="p-1 cursor-pointer">
         <x-phosphor.icons::fill.star x-bind:class="device.is_favorite && 'fill-amber-500'" class="w-6 h-6"/>
@@ -9,7 +9,7 @@
         :label="__('Select a component')"
         :placeholder="__('Component…')"
         :options="$components"
-        wire:model.defer="device.component"
+        wire:model="device.component"
     />
     <h2 class="">{{__('Assigned rooms')}}</h2>
     @foreach($rooms as $room)

@@ -1,12 +1,12 @@
 <div class="space-y-6">
-    <x-input wire:model.defer="room.name" :label="__('Name')" :placeholder="__('Room name…')" />
+    <x-input wire:model="room.name" :label="__('Name')" :placeholder="__('Room name…')" />
     <x-select
         :label="__('Select a level')"
         :placeholder="__('Level…')"
         :options="$levels"
         option-value="id"
         option-label="name"
-        wire:model.defer="room.level_id"
+        wire:model="room.level_id"
     />
     <div class="flex justify-between gap-x-4">
         <x-button negative label="{{__('Löschen')}}" onClick="

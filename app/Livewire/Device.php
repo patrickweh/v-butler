@@ -43,7 +43,7 @@ class Device extends Component
         $this->skipRender();
     }
 
-    public function on()
+    public function switchOn()
     {
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();
@@ -51,7 +51,7 @@ class Device extends Component
         $this->device['is_on'] = true;
     }
 
-    public function off()
+    public function switchOff()
     {
         $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
         $ctrl = new DeviceController();

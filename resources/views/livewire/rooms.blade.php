@@ -9,7 +9,7 @@
     <x-input icon="search" wire:model.live.debounce.500ms="search" :placeholder="__('Search rooms')" />
     <div class="pb-6">
         <div class="border-b border-gray-200" wire:ignore>
-            <nav class="-mb-px flex gap-x-8" x-data="{levels: $wire.entangle('levels'), activeLevel: $wire.entangle('level')}">
+            <nav class="-mb-px flex gap-x-8" x-data="{levels: $wire.$entangle('levels', true), activeLevel: $wire.$entangle('level', true)}">
                 <a href="#"
                    x-on:click.prevent="activeLevel = 0"
                    x-bind:class="{ 'border-blue-500 text-blue-600': activeLevel === 0, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeLevel !== 0 }"
