@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-6" x-data="{device: $wire.entangle('device')}">
     <x-input wire:model.defer="device.name" :label="__('Name')" :placeholder="__('Device name…')" />
     @if($device['id'] ?? false)
     <div wire:click="favorite({{$device['id']}}, {{(string)!$device['is_favorite']}})" class="p-1 cursor-pointer">
@@ -43,7 +43,7 @@
                             reject: {
                                 label: '{{__('Cancel')}}'
                             }
-                        }, '{{$this->id}}')
+                        }, '{{$this->getId()}}')
                 " />
 
         <div class="flex">

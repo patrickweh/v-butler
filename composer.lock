@@ -4,8 +4,76 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daa861a28f133047ca358a5a3fe5538f",
+    "content-hash": "ac1129a449078306de63e7705efa2eac",
     "packages": [
+        {
+            "name": "arthurkushman/php-wss",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arthurkushman/php-wss.git",
+                "reference": "f04fa59311cab0fe2e406878b4a167227ac50993"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arthurkushman/php-wss/zipball/f04fa59311cab0fe2e406878b4a167227ac50993",
+                "reference": "f04fa59311cab0fe2e406878b4a167227ac50993",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "monolog/monolog": "^1.24",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9"
+            },
+            "suggest": {
+                "ext-pcntl": "Allows for forking the server process to handle more clients at once"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WSSC\\": "src",
+                    "WSSCTEST\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Web-socket server/client with URI parse and multi-process support",
+            "homepage": "https://github.com/arthurkushman/php-wss",
+            "keywords": [
+                "php",
+                "processes",
+                "routes",
+                "web socket",
+                "web socket client",
+                "web socket server",
+                "web-sockets"
+            ],
+            "support": {
+                "issues": "https://github.com/arthurkushman/php-wss/issues",
+                "source": "https://github.com/arthurkushman/php-wss/tree/2.0.5"
+            },
+            "funding": [
+                {
+                    "url": "https://issuehunt.io/r/arthurkushman",
+                    "type": "issuehunt"
+                },
+                {
+                    "url": "https://liberapay.com/arthurkushman",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://www.patreon.com/user?u=26175584",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-07-26T01:43:58+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.8",

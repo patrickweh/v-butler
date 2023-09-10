@@ -14,14 +14,14 @@
         @if($device['is_on'])
         <x-button class="w-full" secondary wire:click="off" spinner="off" loading-delay="short">
             <x-slot name="label">
-                <x-phosphor.icons::fill.stop />
+                <x-phosphor.icons::fill.stop class="w-6 h-6" />
                 {{__('Stop')}}
             </x-slot>
         </x-button>
         @else
         <x-button class="w-full" primary wire:click="on" spinner="on" loading-delay="short">
             <x-slot name="label">
-                <x-phosphor.icons::fill.play class="w-10 h-10"/>
+                <x-phosphor.icons::fill.play class="w-6 h-6"/>
                 {{__('Start')}}
             </x-slot>
         </x-button>

@@ -18,7 +18,11 @@ class Kernel extends ConsoleKernel
         $cronjobs = Cronjob::query()->where('is_active', true)->get();
 
         foreach ($cronjobs as $cronjob) {
-            $schedule->{$cronjob->type}(get_class(new $cronjob->command()), $cronjob->command_params ?? [])->cron($cronjob->expression);
+            try {
+                $schedule->{$cronjob->type}(get_class(new $cronjob->command()), $cronjob->command_params ?? [])->cron($cronjob->expression);
+            } catch (\Exception $e) {
+                logger()->error('Cronjob failed', ['cronjob' => $cronjob->toArray(), 'exception' => $e->getMessage()]);
+            }
         }
 
         // These are mandatory cronjobs

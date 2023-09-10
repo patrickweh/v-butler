@@ -24,6 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rooms', Rooms::class)->name('rooms');
     Route::get('/rooms/edit/{roomModel?}', EditRoom::class)->name('rooms.edit.id?');
     Route::get('/devices/{room?}', Devices::class)->name('devices');
-    Route::get('/devices/edit/{id?}', EditDevice::class)->name('devices.edit.id?');
+    Route::get('/device/edit/{id?}', EditDevice::class)->name('devices.edit.id?');
     Route::get('/profile', Profile::class)->name('profile');
 });

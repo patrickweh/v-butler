@@ -12,6 +12,7 @@
         "ext-simplexml": "*",
         "ext-soap": "*",
         "ext-sockets": "*",
+        "arthurkushman/php-wss": "^2.0",
         "beyondcode/laravel-websockets": "^1.13",
         "ggottwald/miio": "^0.7.1",
         "guzzlehttp/guzzle": "^7.2",

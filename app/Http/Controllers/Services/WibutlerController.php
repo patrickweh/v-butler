@@ -4,24 +4,32 @@ namespace App\Http\Controllers\Services;
 
 use App\Helpers\WibutlerClient;
 use App\Http\Controllers\Controller;
+use App\Http\Integrations\Wibutler\Requests\Devices\Components\Patch;
+use App\Http\Integrations\Wibutler\WibutlerConnector;
 use App\Models\Device;
 use App\Models\Service;
 
 class WibutlerController extends Controller
 {
+    public WibutlerConnector $connector;
+
+    public function __construct()
+    {
+        $this->connector = new WibutlerConnector();
+    }
+
+
     public function on(Device $device)
     {
-        $client = new WibutlerClient($device->service);
-        $this->toggleState($device, $client, true);
+        $this->toggleState($device, true);
     }
 
     public function off(Device $device)
     {
-        $client = new WibutlerClient($device->service);
-        $this->toggleState($device, $client, false);
+        $this->toggleState($device, false);
     }
 
-    private function toggleState(Device $device, WibutlerClient $client, bool $on)
+    private function toggleState(Device $device, bool $on)
     {
         $component = match ($device->component) {
             'blind' => 'SWT_POS',
@@ -33,28 +41,18 @@ class WibutlerController extends Controller
             'value' => $on ? 'ON' : 'OFF',
         ];
 
-        $client->sendCommand(
-            slug: 'devices/'.$device->foreign_id.'/components/'.$component,
-            method: 'PATCH',
-            body: $payload
-        );
+        $this->connector->send(new Patch($device, $component, $payload));
     }
 
     public function value(Device $device, string $value)
     {
-        $client = new WibutlerClient($device->service);
-
         $component = 'POS';
         $payload = [
             'type' => 'numeric',
             'value' => $value,
         ];
 
-        $client->sendCommand(
-            slug: 'devices/'.$device->foreign_id.'/components/'.$component,
-            method: 'PATCH',
-            body: $payload
-        );
+        $this->connector->send(new Patch($device, $component, $payload));
     }
 
     public function import(Service $service)

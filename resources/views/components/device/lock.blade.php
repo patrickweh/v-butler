@@ -16,7 +16,7 @@
         <div class="-mt-px flex divide-x divide-gray-200">
             <x-button class="w-full" wire:click="on" primary spinner="on" loading-delay="short">
                 <x-slot name="label">
-                    <x-phosphor.icons::fill.lock-open class="w-10 h-10"/>
+                    <x-phosphor.icons::fill.lock-open class="w-6 h-6"/>
                     {{__('Open')}}
                 </x-slot>
             </x-button>

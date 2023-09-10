@@ -1,0 +1,9 @@
+/var/www/--placeholder--/storage/logs/laravel.log {
+    weekly
+    missingok
+    rotate 12
+    compress
+    notifempty
+    su www-data www-data
+    create 700 www-data www-data
+}
