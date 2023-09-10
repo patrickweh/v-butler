@@ -13,14 +13,12 @@ class WibutlerConnector extends Connector
 
     /**
      * The Base URL of the API
-     *
-     * @return string
      */
     public function resolveBaseUrl(): string
     {
         $service = Service::query()->where('name', 'wibutler')->first();
 
-        return \Str::finish($service->url, '/') . 'api';
+        return \Str::finish($service->url, '/').'api';
     }
 
     /**

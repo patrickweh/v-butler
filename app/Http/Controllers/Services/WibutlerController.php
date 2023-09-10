@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Services;
 
-use App\Helpers\WibutlerClient;
 use App\Http\Controllers\Controller;
+use App\Http\Integrations\Wibutler\Requests\Devices;
 use App\Http\Integrations\Wibutler\Requests\Devices\Components\Patch;
 use App\Http\Integrations\Wibutler\WibutlerConnector;
 use App\Models\Device;
@@ -17,7 +17,6 @@ class WibutlerController extends Controller
     {
         $this->connector = new WibutlerConnector();
     }
-
 
     public function on(Device $device)
     {
@@ -55,13 +54,13 @@ class WibutlerController extends Controller
         $this->connector->send(new Patch($device, $component, $payload));
     }
 
-    public function import(Service $service)
+    public function import()
     {
-        $client = new WibutlerClient($service);
-        $response = $client->sendCommand('devices');
+        $service = Service::query()->where('name', 'wibutler')->first();
+        $response = $this->connector->send(new Devices());
 
-        foreach ($response->devices as $wibutlerDevice) {
-            $component = match ($wibutlerDevice->type) {
+        foreach ($response->json() as $wibutlerDevice) {
+            $component = match ($wibutlerDevice['type'] ?? false) {
                 'Blind' => 'blind',
                 'SwitchingRelays' => 'switch',
                 'WeatherSensors' => 'weather',

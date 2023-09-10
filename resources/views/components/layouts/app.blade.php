@@ -10,12 +10,10 @@
     <meta name="pusher-cluster" content="{{ config('broadcasting.connections.pusher.options.cluster', 'mt1') }}">
 
     <title>{{config('app.name')}}</title>
-    <livewire:scripts/>
     <wireui:scripts />
     @vite('resources/js/features/echo.js')
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
-    <livewire:styles />
 </head>
 <body class="antialiased bg-slate-50 dark:bg-black dark:text-gray-100">
     <x-notifications z-index="z-50" />

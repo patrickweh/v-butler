@@ -16,8 +16,6 @@ class WibutlerAuthenticator implements Authenticator
     /**
      * Apply the authentication to the request.
      *
-     * @param PendingRequest $pendingRequest
-     * @return void
      * @throws \Exception
      */
     public function set(PendingRequest $pendingRequest): void
@@ -29,7 +27,7 @@ class WibutlerAuthenticator implements Authenticator
         $response = $pendingRequest->getConnector()->send(new Login());
 
         if ($response->successful()) {
-            $pendingRequest->headers()->add('Authorization', 'Bearer ' . $response->json('sessionToken'));
+            $pendingRequest->headers()->add('Authorization', 'Bearer '.$response->json('sessionToken'));
         } else {
             throw new \Exception('Wibutler Login failed');
         }

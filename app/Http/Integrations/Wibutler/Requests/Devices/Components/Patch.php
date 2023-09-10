@@ -12,7 +12,7 @@ class Patch extends Request implements HasBody
 {
     use HasJsonBody;
 
-    public function __construct(public Device $device, public string $component, ?array $body = null)
+    public function __construct(public Device $device, public string $component, array $body = null)
     {
         if ($body) {
             $this->body()->set($body);
@@ -21,18 +21,14 @@ class Patch extends Request implements HasBody
 
     /**
      * Define the HTTP method
-     *
-     * @var Method
      */
     protected Method $method = Method::PATCH;
 
     /**
      * Define the endpoint for the request
-     *
-     * @return string
      */
     public function resolveEndpoint(): string
     {
-        return '/devices/' . $this->device->foreign_id . '/components/' . $this->component;
+        return '/devices/'.$this->device->foreign_id.'/components/'.$this->component;
     }
 }
