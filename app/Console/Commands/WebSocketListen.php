@@ -56,6 +56,9 @@ class WebSocketListen extends Command
                         }
 
                         $device->save();
+                        $this->info('Device updated: ' . $device->name
+                            . ' value: ' . $device->value . ' | is on:' . $device->is_on
+                        );
                     }
                 }
             }
