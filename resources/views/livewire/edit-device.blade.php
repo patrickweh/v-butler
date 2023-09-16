@@ -23,7 +23,7 @@
                 <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model.live="selected" :label="$device['name']"/>
         @endforeach
         </ul>
-        <x-input wire:mode.live="search" icon="search" />
+        <x-input wire:model.live="search" icon="search" />
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class="opacity-75">
         @foreach($devices as $device)
             <x-checkbox value="{{$device['id']}}" :id="(string)\Illuminate\Support\Str::uuid()" wire:model.live="selected" :label="$device['name']"/>
