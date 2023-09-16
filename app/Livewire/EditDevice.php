@@ -92,7 +92,7 @@ class EditDevice extends Component
 
     public function updatedSelected($id)
     {
-        $this->children = Device::query()->whereIntegerInRaw('id', array_values($id))->get()->toArray();
+        $this->children = Device::query()->whereIntegerInRaw('id', $this->selected)->get()->toArray();
     }
 
     public function favorite($id, bool $attach = false)
