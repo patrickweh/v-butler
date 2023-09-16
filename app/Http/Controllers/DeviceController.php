@@ -8,11 +8,18 @@ class DeviceController extends Controller
 {
     public function on(Device $device)
     {
-        $devices = $device->is_group ? $this->getDevices($device->children) : [$device];
+        $devices = $device->allDescendants()
+            ->push($device)
+            ->filter(fn($device) => ! $device->is_group && $device->service);
 
         $parents = [];
         foreach ($devices as $singleDevice) {
-            $ctrl = new $singleDevice->service->controller;
+            $ctrl = new $singleDevice->service?->controller;
+
+            if (! $ctrl) {
+                continue;
+            }
+
             $ctrl->on($singleDevice);
             $singleDevice->is_on = true;
             $singleDevice->save();
@@ -25,11 +32,17 @@ class DeviceController extends Controller
 
     public function off(Device $device)
     {
-        $devices = $device->is_group ? $device->children : [$device];
+        $devices = $device->allDescendants()
+            ->push($device)
+            ->filter(fn($device) => ! $device->is_group && $device->service);
 
         $parents = [];
         foreach ($devices as $singleDevice) {
-            $ctrl = new $singleDevice->service->controller;
+            $ctrl = new $singleDevice->service?->controller;
+            if (! $ctrl) {
+                continue;
+            }
+
             $ctrl->off($singleDevice);
             $singleDevice->is_on = false;
             $singleDevice->save();
@@ -42,7 +55,9 @@ class DeviceController extends Controller
 
     public function value(Device $device, int $value)
     {
-        $devices = $device->is_group ? $device->children : [$device];
+        $devices = $device->allDescendants()
+            ->push($device)
+            ->filter(fn($device) => ! $device->is_group && $device->service);
 
         $parents = [];
         foreach ($devices as $singleDevice) {
@@ -59,12 +74,12 @@ class DeviceController extends Controller
 
     private function getDevices(iterable $devices)
     {
-        $flatDevices = [];
+        $flatDevices = collect();
         foreach ($devices as $device) {
             if ($device->is_group) {
-                $flatDevices[] = $this->getDevices($device->children);
+                $flatDevices->merge($this->getDevices($device->children));
             } else {
-                $flatDevices[] = $device;
+                $flatDevices->add($device);
             }
         }
 

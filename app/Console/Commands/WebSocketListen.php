@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\DeviceController;
 use App\Http\Integrations\Wibutler\Requests\Login;
 use App\Http\Integrations\Wibutler\WibutlerConnector;
 use App\Models\Service;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
 use WebSocket\Client;
@@ -23,7 +25,12 @@ class WebSocketListen extends Command
     public function handle()
     {
         $client = new WibutlerConnector();
-        $token = $client->send(new Login())->json('sessionToken');
+        $token = $client->send(new Login());
+        if ($token->successful()) {
+            $token = $token->json('sessionToken');
+        } else {
+            return;
+        }
         $service = Service::query()->where('name', 'wibutler')->first();
         if (! $service) {
             return;
@@ -35,6 +42,7 @@ class WebSocketListen extends Command
         ];
 
         $client = new Client($url, $options);
+        $deviceController = new DeviceController();
 
         while (true) {
             $message = $client->receive();
@@ -44,20 +52,28 @@ class WebSocketListen extends Command
                 ->first();
             if ($device) {
                 $components = collect(data_get($messageArray, 'data.components'))
-                    ->filter(fn ($component) => $component['type'] === 'switch' || $component['type'] === 'numeric')
+                    ->filter(fn ($component) => $component['type'] === 'switcher' || $component['type'] === 'numeric')
                     ->map(fn ($component) => new Fluent($component));
 
                 if ($components->count() > 0) {
                     foreach ($components as $component) {
                         if ($component->type === 'numeric') {
                             $device->value = $component->value;
+                        } elseif ($component->type === 'switcher') {
+                            if (Str::endsWith($component->value, 'D')) {
+                                Cache::put($device->id, now(), now()->addSeconds(5));
+                            } else {
+                                Cache::pull($device->id);
+                                $action = Str::startsWith($component->value, '0') ? 'on' : 'off';
+                                $deviceController->{$action}($device);
+                            }
                         } else {
                             $device->is_on = $component->value === 'ONReleased';
                         }
 
                         $device->save();
                         $this->info('Device updated: ' . $device->name
-                            . ' value: ' . $device->value . ' | is on:' . $device->is_on
+                            . ' value: ' . $device->value . ' | is on:' . (bool) $device->is_on
                         );
                     }
                 }

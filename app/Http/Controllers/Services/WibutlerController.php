@@ -59,38 +59,39 @@ class WibutlerController extends Controller
         $service = Service::query()->where('name', 'wibutler')->first();
         $response = $this->connector->send(new Devices());
 
-        foreach ($response->json() as $wibutlerDevice) {
+        foreach ($response->json('devices') ?? [] as $wibutlerDevice) {
             $component = match ($wibutlerDevice['type'] ?? false) {
                 'Blind' => 'blind',
                 'SwitchingRelays' => 'switch',
                 'WeatherSensors' => 'weather',
                 'FloorHeatingController' => 'heating',
                 'RoomOperatingPanels' => 'room-temperature',
+                'Switches' => 'switch',
                 default => 'none'
             };
 
-            $components = collect($wibutlerDevice->components);
+            $components = collect($wibutlerDevice['components']);
 
-            $device = Device::query()
-                ->where('foreign_id', $wibutlerDevice->id)
+            $device = Device::withTrashed()
+                ->where('foreign_id', $wibutlerDevice['id'])
                 ->where('service_id', $service->id)
                 ->firstOrNew();
 
-            $value = match ($wibutlerDevice->type) {
-                'Blind' => $components->where('name', 'CURPOS')->first()?->value ?? null,
-                'FloorHeatingController' => $components->where('name', 'TSP')->first()?->value ?? null,
-                'RoomOperatingPanels' => (float) $wibutlerDevice->statetext,
+            $value = match ($wibutlerDevice['type']) {
+                'Blind' => $components->where('name', 'CURPOS')->first()['value'] ?? null,
+                'FloorHeatingController' => $components->where('name', 'TSP')->first()['value'] ?? null,
+                'RoomOperatingPanels' => (float) $wibutlerDevice['statetext'],
                 default => null
             };
 
             $device->fill([
-                'name' => $device->exists ? $device->name : $wibutlerDevice->name,
+                'name' => $device->exists ? $device->name : $wibutlerDevice['name'],
                 'component' => $component,
                 'details' => $wibutlerDevice,
-                'is_on' => (bool) $components->where('name', 'STATE')->first()?->value ?? null,
+                'is_on' => (bool) ($components->where('name', 'STATE')->first()['value'] ?? null),
                 'value' => $value,
                 'service_id' => $service->id,
-                'foreign_id' => $wibutlerDevice->id,
+                'foreign_id' => $wibutlerDevice['id'],
             ]);
             $device->save();
         }
