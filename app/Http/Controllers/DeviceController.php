@@ -6,12 +6,11 @@ use App\Models\Device;
 
 class DeviceController extends Controller
 {
-    public function on(Device $device)
+    public function on(Device $device, ?string $name = null)
     {
-        $devices = $device->allDescendants()
+        $devices = $device->allDescendants($name)
             ->push($device)
             ->filter(fn($device) => ! $device->is_group && $device->service);
-
         $parents = [];
         foreach ($devices as $singleDevice) {
             $ctrl = new $singleDevice->service?->controller;
@@ -30,9 +29,9 @@ class DeviceController extends Controller
         $this->updateParents($parents, ['is_on' => true]);
     }
 
-    public function off(Device $device)
+    public function off(Device $device, ?string $name = null)
     {
-        $devices = $device->allDescendants()
+        $devices = $device->allDescendants($name)
             ->push($device)
             ->filter(fn($device) => ! $device->is_group && $device->service);
 
@@ -53,9 +52,9 @@ class DeviceController extends Controller
         $this->updateParents($parents, ['is_on' => false]);
     }
 
-    public function value(Device $device, int $value)
+    public function value(Device $device, int $value, ?string $name = null)
     {
-        $devices = $device->allDescendants()
+        $devices = $device->allDescendants($name)
             ->push($device)
             ->filter(fn($device) => ! $device->is_group && $device->service);
 

@@ -66,7 +66,7 @@ class WibutlerController extends Controller
                 'WeatherSensors' => 'weather',
                 'FloorHeatingController' => 'heating',
                 'RoomOperatingPanels' => 'room-temperature',
-                'Switches' => 'switch',
+                'Switches' => 'double-switch',
                 default => 'none'
             };
 

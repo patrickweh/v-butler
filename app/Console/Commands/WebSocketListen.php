@@ -50,6 +50,9 @@ class WebSocketListen extends Command
             $device = \App\Models\Device::query()
                 ->where('foreign_id', data_get($messageArray, 'data.id'))
                 ->first();
+            if (data_get($messageArray, 'data.id') === '895c5110174e4b80aebc37bbb8cedaa2') {
+                $this->error($message);
+            }
             if ($device) {
                 $components = collect(data_get($messageArray, 'data.components'))
                     ->filter(fn ($component) => $component['type'] === 'switcher' || $component['type'] === 'numeric')
@@ -65,7 +68,7 @@ class WebSocketListen extends Command
                             } else {
                                 Cache::pull($device->id);
                                 $action = Str::startsWith($component->value, '0') ? 'on' : 'off';
-                                $deviceController->{$action}($device);
+                                $deviceController->{$action}($device, $component->name);
                             }
                         } else {
                             $device->is_on = $component->value === 'ONReleased';

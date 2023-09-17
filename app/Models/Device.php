@@ -62,11 +62,12 @@ class Device extends Model
         return $this->belongsToMany(Device::class, 'device_devices', 'parent_id');
     }
 
-    public function allDescendants()
+    public function allDescendants(?string $name = null)
     {
         $descendants = collect();
 
-        foreach ($this->children()->with('service')->get() as $child) {
+        foreach ($this->children()->wherePivot('device_devices.name', $name)
+                     ->with('service')->get() as $child) {
             $descendants->push($child);
             $descendants = $descendants->merge($child->allDescendants());
         }
