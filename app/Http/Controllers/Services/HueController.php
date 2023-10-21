@@ -26,6 +26,8 @@ class HueController extends Controller
     {
         $client = new Client($device->service->url, $device->service->token);
         $params = new SetLightState($device->foreign_id);
+        $value = (int) round($value / 100 * 255);
+
         $params->on()->brightness($value);
         $client->sendCommand($params);
 
