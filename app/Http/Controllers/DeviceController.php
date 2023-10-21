@@ -98,4 +98,16 @@ class DeviceController extends Controller
             $parentDevice->save();
         }
     }
+
+    public function call(Device $device, string $method, $params)
+    {
+        $devices = $device->allDescendants()
+            ->push($device)
+            ->filter(fn($device) => ! $device->is_group && $device->service);
+
+        foreach ($devices as $singleDevice) {
+            $ctrl = new $singleDevice->service->controller;
+            $ctrl->{$method}($singleDevice, $params);
+        }
+    }
 }

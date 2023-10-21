@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Device;
 use App\Models\Service;
 use Phue\Client;
+use Phue\Command\GetLightById;
 use Phue\Command\SetLightState;
 
 class HueController extends Controller
@@ -47,6 +48,22 @@ class HueController extends Controller
         $client->sendCommand($params);
         $device->is_on = $on;
         $device->value = 254;
+        $device->save();
+    }
+
+    public function setRGB(Device $device, string $rgb): void
+    {
+        $client = new Client($device->service->url, $device->service->token);
+        $params = new SetLightState($device->foreign_id);
+        $getStates = $client->sendCommand(new GetLightById($device->foreign_id));
+        $brightness = $getStates->getBrightness();
+
+        $rgb = hex_to_rgb($rgb);
+        $params->on(true)->rgb($rgb['r'], $rgb['g'], $rgb['b'])->brightness($brightness);
+        $client->sendCommand($params);
+
+        $device->is_on = true;
+        $device->value = $brightness;
         $device->save();
     }
 

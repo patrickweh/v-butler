@@ -83,6 +83,23 @@ if (! function_exists('hsl_to_rgb')) {
     }
 }
 
+if (! function_exists('hex_to_rgb')) {
+    function hex_to_rgb($hex): array
+    {
+        $hex = str_replace('#', '', $hex);
+        if (strlen($hex) === 3) {
+            $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
+        }
+
+        $rgb = [];
+        $rgb['r'] = hexdec(substr($hex, 0, 2));
+        $rgb['g'] = hexdec(substr($hex, 2, 2));
+        $rgb['b'] = hexdec(substr($hex, 4, 2));
+
+        return $rgb;
+    }
+}
+
 if (! function_exists('percent_to_color')) {
     function percent_to_color($value, $min, $max)
     {

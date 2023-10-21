@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\DeviceDetail;
 use App\Livewire\Devices;
 use App\Livewire\EditDevice;
 use App\Livewire\EditRoom;
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rooms', Rooms::class)->name('rooms');
     Route::get('/rooms/edit/{roomModel?}', EditRoom::class)->name('rooms.edit.id?');
     Route::get('/devices/{room?}', Devices::class)->name('devices');
+    Route::get('/device/{device}', DeviceDetail::class)->name('device.id');
     Route::get('/device/edit/{id?}', EditDevice::class)->name('devices.edit.id?');
     Route::get('/profile', Profile::class)->name('profile');
 });

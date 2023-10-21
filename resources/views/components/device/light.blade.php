@@ -1,8 +1,22 @@
-<div class="w-full flex items-center justify-between px-6 pt-6 space-x-6">
+<div class="w-full flex items-center justify-between px-6 pt-6 space-x-6"
+    x-data="{
+        init() {
+            $watch('color', value => {
+                if (value) {
+                    $wire.callMethod('setRGB', value);
+                }
+            });
+        },
+        color: null,
+    }"
+>
     <div class="flex-1 truncate">
         <div class="flex items-center space-x-3">
-            <x-phosphor.icons::fill.lightbulb x-bind:class="device.is_on && 'fill-amber-500'" class="w-10 h-10"/>
-            <h3 class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name']}}</h3>
+            <label>
+                <input x-model="color" type="color" style="width: 1px; height: 1px; background: transparent; border: none;" />
+                <x-phosphor.icons::fill.lightbulb x-bind:fill="device.is_on && (color || '#f59e0b')" class="w-10 h-10"/>
+            </label>
+            <h3 x-bind:class="device.is_group && 'cursor-pointer'" x-on:click="$wire.showSubDevices(device.id)" class="dark:text-white text-gray-900 text-sm font-medium truncate">{{$device['name']}}</h3>
         </div>
     </div>
     <x-toggle :id="(string)\Illuminate\Support\Str::uuid()" x-on:click="$wire.toggle(); device.is_on = !device.is_on" lg wire:model="device.is_on" />

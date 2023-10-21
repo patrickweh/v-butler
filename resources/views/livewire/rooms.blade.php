@@ -1,7 +1,6 @@
 <div>
     <div class="flex justify-between">
         <h1>{{__('Rooms')}}</h1>
-        {{--        <i onclick="$openModal('newDeviceModal')" class="fa-regular fa-plus-circle text-blue-500 cursor-pointer"></i>--}}
         <a href="{{route('devices.edit.id?')}}">
             <x-phosphor.icons::regular.plus-circle class="fill-blue-500 cursor-pointer w-6 h-6" />
         </a>
@@ -36,7 +35,7 @@
                 </div>
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class="opacity-75">
                 @foreach($room['group_devices'] as $device)
-                    <livewire:device :device="$device" wire:key="{{ uniqid() }}"/>
+                    <livewire:device lazy :device="$device" wire:key="{{ uniqid() }}"/>
                 @endforeach
                 </ul>
             </div>

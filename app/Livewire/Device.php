@@ -66,4 +66,16 @@ class Device extends Component
         $ctrl->value($device, $value);
         $this->device['value'] = $value;
     }
+
+    public function callMethod(string $method, string|array $params = [])
+    {
+        $device = \App\Models\Device::query()->whereKey($this->device['id'])->first();
+        $ctrl = new DeviceController();
+        $ctrl->call($device, $method, $params);
+    }
+
+    public function showSubDevices(\App\Models\Device $device)
+    {
+        $this->redirect(route('device.id', $device->id));
+    }
 }
