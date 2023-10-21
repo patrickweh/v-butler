@@ -136,6 +136,9 @@ return [
             \App\Models\Room::class => [
                 'filterableAttributes' => ['level_id'],
             ],
+            \App\Models\Device::class => [
+                'filterableAttributes' => ['room_ids'],
+            ]
         ],
     ],
 
